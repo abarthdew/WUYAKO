@@ -1,247 +1,246 @@
 package dto;
 
 public class AdminDTO {
-	private String visitDate;
-	private int visitCount;
-	private int male;
-	private int female;
-	private int teenage;
-	private int twenty;
-	private int thirty;
-	private int forty;
-	private int fifty;
-	private int sixty;
-	private int seventy;
-	private int eighty;
-	private int ninety;
-	private int perTeenage;
-	private int perTwenty;
-	private int perThirty;
-	private int perForty;
-	private int perFifty;
-	private int perSixty;
-	private int perSeventy;
-	private int perEighty;
-	private int perNinety;
-	
-	public AdminDTO(String visitDate, int visitCount) {
-		super();
-		this.visitDate = visitDate;
-		this.visitCount = visitCount;
-	}
-	
-	public AdminDTO(int male, int female) {
-		super();
-		this.male = male;
-		this.female = female;
-	}
-		
-	public AdminDTO(int teenage, int twenty, int thirty, int forty, int fifty, int sixty, int seventy, int eighty, int ninety) {
-		super();
-		this.teenage = teenage;
-		this.twenty = twenty;
-		this.thirty = thirty;
-		this.forty = forty;
-		this.fifty = fifty;
-		this.sixty = sixty;
-		this.seventy = seventy;
-		this.eighty = eighty;
-		this.ninety = ninety;
-	}
+  private String visitDate;
+  private int visitCount;
+  private int male;
+  private int female;
+  private int teenage;
+  private int twenty;
+  private int thirty;
+  private int forty;
+  private int fifty;
+  private int sixty;
+  private int seventy;
+  private int eighty;
+  private int ninety;
+  private int perTeenage;
+  private int perTwenty;
+  private int perThirty;
+  private int perForty;
+  private int perFifty;
+  private int perSixty;
+  private int perSeventy;
+  private int perEighty;
+  private int perNinety;
 
-	public AdminDTO(int male, int perTeenage, int perTwenty, int perThirty, int perForty, int perFifty, int perSixty, int perSeventy, int perEighty, int perNinety) {
-		super();
-		this.male = male;
-		this.perTeenage = perTeenage;
-		this.perTwenty = perTwenty;
-		this.perThirty = perThirty;
-		this.perForty = perForty;
-		this.perFifty = perFifty;
-		this.perSixty = perSixty;
-		this.perSeventy = perSeventy;
-		this.perEighty = perEighty;
-		this.perNinety = perNinety;
-	}
+  public AdminDTO(String visitDate, int visitCount) {
+    super();
+    this.visitDate = visitDate;
+    this.visitCount = visitCount;
+  }
 
-	public AdminDTO() {
-	}
+  public AdminDTO(int male, int female) {
+    super();
+    this.male = male;
+    this.female = female;
+  }
 
-	public String getVisitDate() {
-		return visitDate;
-	}
+  public AdminDTO(int teenage, int twenty, int thirty, int forty, int fifty, int sixty, int seventy, int eighty, int ninety) {
+    super();
+    this.teenage = teenage;
+    this.twenty = twenty;
+    this.thirty = thirty;
+    this.forty = forty;
+    this.fifty = fifty;
+    this.sixty = sixty;
+    this.seventy = seventy;
+    this.eighty = eighty;
+    this.ninety = ninety;
+  }
 
-	public void setVisitDate(String visitDate) {
-		this.visitDate = visitDate;
-	}
+  public AdminDTO(int male, int perTeenage, int perTwenty, int perThirty, int perForty, int perFifty, int perSixty, int perSeventy, int perEighty, int perNinety) {
+    super();
+    this.male = male;
+    this.perTeenage = perTeenage;
+    this.perTwenty = perTwenty;
+    this.perThirty = perThirty;
+    this.perForty = perForty;
+    this.perFifty = perFifty;
+    this.perSixty = perSixty;
+    this.perSeventy = perSeventy;
+    this.perEighty = perEighty;
+    this.perNinety = perNinety;
+  }
 
-	public int getVisitCount() {
-		return visitCount;
-	}
+  public AdminDTO() {
+  }
 
-	public void setVisitCount(int visitCount) {
-		this.visitCount = visitCount;
-	}
+  public String getVisitDate() {
+    return visitDate;
+  }
 
-	public int getMale() {
-		return male;
-	}
+  public void setVisitDate(String visitDate) {
+    this.visitDate = visitDate;
+  }
 
-	public void setMale(int male) {
-		this.male = male;
-	}
+  public int getVisitCount() {
+    return visitCount;
+  }
 
-	public int getFemale() {
-		return female;
-	}
+  public void setVisitCount(int visitCount) {
+    this.visitCount = visitCount;
+  }
 
-	public void setFemale(int female) {
-		this.female = female;
-	}
+  public int getMale() {
+    return male;
+  }
 
-	public int getTeenage() {
-		return teenage;
-	}
+  public void setMale(int male) {
+    this.male = male;
+  }
 
-	public void setTeenage(int teenage) {
-		this.teenage = teenage;
-	}
+  public int getFemale() {
+    return female;
+  }
 
-	public int getTwenty() {
-		return twenty;
-	}
+  public void setFemale(int female) {
+    this.female = female;
+  }
 
-	public void setTwenty(int twenty) {
-		this.twenty = twenty;
-	}
+  public int getTeenage() {
+    return teenage;
+  }
 
-	public int getThirty() {
-		return thirty;
-	}
+  public void setTeenage(int teenage) {
+    this.teenage = teenage;
+  }
 
-	public void setThirty(int thirty) {
-		this.thirty = thirty;
-	}
+  public int getTwenty() {
+    return twenty;
+  }
 
-	public int getForty() {
-		return forty;
-	}
+  public void setTwenty(int twenty) {
+    this.twenty = twenty;
+  }
 
-	public void setForty(int forty) {
-		this.forty = forty;
-	}
+  public int getThirty() {
+    return thirty;
+  }
 
-	public int getFifty() {
-		return fifty;
-	}
+  public void setThirty(int thirty) {
+    this.thirty = thirty;
+  }
 
-	public void setFifty(int fifty) {
-		this.fifty = fifty;
-	}
+  public int getForty() {
+    return forty;
+  }
 
-	public int getSixty() {
-		return sixty;
-	}
+  public void setForty(int forty) {
+    this.forty = forty;
+  }
 
-	public void setSixty(int sixty) {
-		this.sixty = sixty;
-	}
+  public int getFifty() {
+    return fifty;
+  }
 
-	public int getSeventy() {
-		return seventy;
-	}
+  public void setFifty(int fifty) {
+    this.fifty = fifty;
+  }
 
-	public void setSeventy(int seventy) {
-		this.seventy = seventy;
-	}
+  public int getSixty() {
+    return sixty;
+  }
 
-	public int getEighty() {
-		return eighty;
-	}
+  public void setSixty(int sixty) {
+    this.sixty = sixty;
+  }
 
-	public void setEighty(int eighty) {
-		this.eighty = eighty;
-	}
+  public int getSeventy() {
+    return seventy;
+  }
 
-	public int getNinety() {
-		return ninety;
-	}
+  public void setSeventy(int seventy) {
+    this.seventy = seventy;
+  }
 
-	public void setNinety(int ninety) {
-		this.ninety = ninety;
-	}
+  public int getEighty() {
+    return eighty;
+  }
 
-	public int getPerTeenage() {
-		return perTeenage;
-	}
+  public void setEighty(int eighty) {
+    this.eighty = eighty;
+  }
 
-	public void setPerTeenage(int perTeenage) {
-		this.perTeenage = perTeenage;
-	}
+  public int getNinety() {
+    return ninety;
+  }
 
-	public int getPerTwenty() {
-		return perTwenty;
-	}
+  public void setNinety(int ninety) {
+    this.ninety = ninety;
+  }
 
-	public void setPerTwenty(int perTwenty) {
-		this.perTwenty = perTwenty;
-	}
+  public int getPerTeenage() {
+    return perTeenage;
+  }
 
-	public int getPerThirty() {
-		return perThirty;
-	}
+  public void setPerTeenage(int perTeenage) {
+    this.perTeenage = perTeenage;
+  }
 
-	public void setPerThirty(int perThirty) {
-		this.perThirty = perThirty;
-	}
+  public int getPerTwenty() {
+    return perTwenty;
+  }
 
-	public int getPerForty() {
-		return perForty;
-	}
+  public void setPerTwenty(int perTwenty) {
+    this.perTwenty = perTwenty;
+  }
 
-	public void setPerForty(int perForty) {
-		this.perForty = perForty;
-	}
+  public int getPerThirty() {
+    return perThirty;
+  }
 
-	public int getPerFifty() {
-		return perFifty;
-	}
+  public void setPerThirty(int perThirty) {
+    this.perThirty = perThirty;
+  }
 
-	public void setPerFifty(int perFifty) {
-		this.perFifty = perFifty;
-	}
+  public int getPerForty() {
+    return perForty;
+  }
 
-	public int getPerSixty() {
-		return perSixty;
-	}
+  public void setPerForty(int perForty) {
+    this.perForty = perForty;
+  }
 
-	public void setPerSixty(int perSixty) {
-		this.perSixty = perSixty;
-	}
+  public int getPerFifty() {
+    return perFifty;
+  }
 
-	public int getPerSeventy() {
-		return perSeventy;
-	}
+  public void setPerFifty(int perFifty) {
+    this.perFifty = perFifty;
+  }
 
-	public void setPerSeventy(int perSeventy) {
-		this.perSeventy = perSeventy;
-	}
+  public int getPerSixty() {
+    return perSixty;
+  }
 
-	public int getPerEighty() {
-		return perEighty;
-	}
+  public void setPerSixty(int perSixty) {
+    this.perSixty = perSixty;
+  }
 
-	public void setPerEighty(int perEighty) {
-		this.perEighty = perEighty;
-	}
+  public int getPerSeventy() {
+    return perSeventy;
+  }
 
-	public int getPerNinety() {
-		return perNinety;
-	}
+  public void setPerSeventy(int perSeventy) {
+    this.perSeventy = perSeventy;
+  }
 
-	public void setPerNinety(int perNinety) {
-		this.perNinety = perNinety;
-	}
+  public int getPerEighty() {
+    return perEighty;
+  }
 
-	
-	
+  public void setPerEighty(int perEighty) {
+    this.perEighty = perEighty;
+  }
+
+  public int getPerNinety() {
+    return perNinety;
+  }
+
+  public void setPerNinety(int perNinety) {
+    this.perNinety = perNinety;
+  }
+
+
 }
