@@ -1,8 +1,13 @@
 .guide-hand {
   position: absolute;
-  right: -6px;
-  bottom: -30px;
-  font-size: 44px;
+  right: -8px;
+  bottom: -34px;
+  width: 40px;
+  height: 50px;
+  fill: var(--card);
+  stroke: var(--ink);
+  stroke-width: 2.2;
+  stroke-linejoin: round;
   pointer-events: none;
   filter: drop-shadow(2px 2px 0 var(--ink));
   animation: guide-tap 1.2s ease-in-out infinite;

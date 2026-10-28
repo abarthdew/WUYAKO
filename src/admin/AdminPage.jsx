@@ -2,11 +2,15 @@ import { useEffect, useState } from 'react';
 import { navigate } from '../app/router.js';
 import { adminApi, getToken, setToken } from './adminApi.js';
 import LoginForm from './LoginForm.jsx';
+import LayoutEditor from './layout/LayoutEditor.jsx';
 import ThemeEditor from './theme/ThemeEditor.jsx';
 import './Admin.css';
 
 // 관리 도구 목록. 탭을 추가하려면 여기에 등록한다.
-const TOOLS = [{ id: 'theme', label: '업종 테마', component: ThemeEditor }];
+const TOOLS = [
+  { id: 'theme', label: '업종 테마', component: ThemeEditor },
+  { id: 'layout', label: '메인 화면', component: LayoutEditor },
+];
 
 export default function AdminPage({ tool = 'theme' }) {
   const [authed, setAuthed] = useState(null);

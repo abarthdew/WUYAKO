@@ -22,7 +22,6 @@
 .home__stages {
   display: grid;
   gap: 14px;
-  margin-top: 12px;
 }
 .home__stage {
   display: flex;
@@ -57,22 +56,8 @@
   font-weight: 500;
   color: var(--ink-2);
 }
-.home__theme {
-  display: grid;
-  gap: 6px;
-  font-weight: 700;
-  text-align: left;
-}
-.home__theme select {
-  min-height: 56px;
-  padding: 0 12px;
-  border: var(--border);
-  border-radius: var(--radius);
-  background: var(--card);
-  font: inherit;
-}
 .home__section {
-  margin-top: 12px;
+  margin-top: 16px;
   font-size: 24px;
   text-align: left;
 }

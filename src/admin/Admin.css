@@ -40,6 +40,7 @@
   color: var(--neon);
 }
 .admin-btn {
+  white-space: nowrap;
   min-height: 40px;
   padding: 0 14px;
   border: var(--border);
@@ -132,6 +133,7 @@
   width: 90px;
 }
 .admin-row {
+  white-space: nowrap;
   display: flex;
   flex-wrap: wrap;
   align-items: center;

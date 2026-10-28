@@ -1,0 +1,63 @@
+.slot-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.slot-row {
+  display: grid;
+  grid-template-columns: 28px 96px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border: 2px solid var(--ink-3);
+  border-radius: 6px;
+  background: var(--paper);
+}
+.slot-row.is-hidden {
+  opacity: 0.55;
+}
+.slot-row__no {
+  font-weight: 700;
+  text-align: center;
+}
+.slot-row__type {
+  font-size: 14px;
+  font-weight: 700;
+}
+.slot-row__body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.slot-row__body input,
+.slot-row__body select {
+  min-height: 34px;
+  padding: 2px 6px;
+  border: 2px solid var(--ink-3);
+  border-radius: 6px;
+  background: var(--card);
+  font: inherit;
+}
+.slot-row__actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.layout-preview__frame {
+  max-height: 80vh;
+  overflow-y: auto;
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  background: var(--paper);
+}
+@media (max-width: 700px) {
+  .slot-row {
+    grid-template-columns: 28px 1fr;
+  }
+  .slot-row__body,
+  .slot-row__actions {
+    grid-column: 1 / -1;
+  }
+}
