@@ -49,3 +49,27 @@ describe('구조 학습 ① 버튼 모양', () => {
     expect(screen.getByText('버튼 박사가 됐어요!')).toBeTruthy();
   });
 });
+
+import threeSteps from '../src/data/lessons/three-steps.json';
+import ThreeStepsLesson from '../src/lessons/threeSteps/ThreeStepsLesson.jsx';
+
+describe('구조 학습 ② 3단계 원리', () => {
+  it('설명 3장 → 문제 → 결과, 오답이면 정답을 알려 준다', () => {
+    render(<ThreeStepsLesson lessonId="three-steps" content={threeSteps} onExit={() => {}} />);
+    fireEvent.click(screen.getByText('다음'));
+    fireEvent.click(screen.getByText('다음'));
+    fireEvent.click(screen.getByText('문제 풀어 보기'));
+
+    threeSteps.quiz.forEach((q, i) => {
+      const nextLabel = i + 1 === threeSteps.quiz.length ? '결과 보기' : '다음 문제';
+      expect(screen.getByText(nextLabel).closest('button').disabled).toBe(true);
+      // 첫 문제만 일부러 틀린다
+      const pickId = i === 0 ? threeSteps.steps.find((s) => s.id !== q.answer).id : q.answer;
+      const pickName = threeSteps.steps.find((s) => s.id === pickId).name;
+      fireEvent.click(screen.getByRole('button', { name: new RegExp(pickName) }));
+      expect(screen.getByRole('status').textContent).toMatch(i === 0 ? /아쉬워요/ : /맞았어요/);
+      fireEvent.click(screen.getByText(nextLabel));
+    });
+    expect(screen.getByText(`${threeSteps.quiz.length}문제 중 ${threeSteps.quiz.length - 1}개 맞혔어요!`)).toBeTruthy();
+  });
+});
