@@ -7,7 +7,7 @@ const GAP = 14;
 const labelOf = (el) =>
   el.getAttribute('aria-label') || el.querySelector('[data-label]')?.textContent || el.textContent.trim();
 
-// 엉뚱한 곳을 눌렀을 때 누를 곳을 가리키는 말풍선. screenRef 안의 .is-target을 기준으로 위치를 잡는다.
+// '도움이 필요해요'에서 엉뚱한 곳을 눌렀을 때 누를 곳을 가리키는 말풍선. screenRef 안의 .is-target을 기준으로 위치를 잡는다.
 export default function GuideBubble({ screenRef, onClose }) {
   const [pos, setPos] = useState(null);
 

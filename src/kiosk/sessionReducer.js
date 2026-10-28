@@ -1,6 +1,6 @@
 import { addLine, changeQty, removeLine } from '../features/cart/cart.js';
 
-// 화면 흐름: home → mission → idle → dine → menu(⇄ option) → cart → payment → done
+// 화면 흐름: (1·2단계: mode →) mission → idle → dine → menu(⇄ option) → cart → payment → done
 export const initialState = {
   screen: 'home',
   stageId: 1,
@@ -12,12 +12,18 @@ export const initialState = {
   payMethod: null,
   startedAt: null,
   result: null, // checkMission 결과
+  mode: null, // 1·2단계 연습 방식: 'follow'(따라서 해볼래요) | 'help'(도움이 필요해요)
+  offGuideTaps: 0, // 가이드와 다른 곳을 누른 횟수 (화면 표시용, 저장은 tap 원물)
 };
 
 export const sessionReducer = (state, action) => {
   switch (action.type) {
     case 'START_STAGE':
-      return { ...initialState, stageId: action.stageId, screen: 'mission' };
+      return { ...initialState, stageId: action.stageId, screen: action.screen ?? 'mission' };
+    case 'SET_MODE':
+      return { ...state, mode: action.mode, screen: 'mission' };
+    case 'OFF_GUIDE_TAP':
+      return { ...state, offGuideTaps: state.offGuideTaps + 1 };
     case 'GO':
       return {
         ...state,
@@ -52,7 +58,7 @@ export const sessionReducer = (state, action) => {
     case 'COMPLETE':
       return { ...state, result: action.result, screen: 'done' };
     case 'CANCEL_ORDER':
-      return { ...initialState, stageId: state.stageId, screen: 'idle', startedAt: state.startedAt };
+      return { ...initialState, stageId: state.stageId, screen: 'idle', startedAt: state.startedAt, mode: state.mode, offGuideTaps: state.offGuideTaps };
     case 'RESET':
       return initialState;
     default:

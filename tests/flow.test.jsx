@@ -32,6 +32,7 @@ describe('키오스크 버전', () => {
 
   it('1단계: 손가락 가이드만 따라가면 미션 성공', () => {
     const { container } = run('stage1-v1', missions['fastfood-s1']);
+    fireEvent.click(screen.getByText('도움이 필요해요'));
     fireEvent.click(screen.getByText('시작하기'));
     expect(container.querySelector('.guide-hand')).toBeTruthy();
     followGuide(container);
@@ -40,6 +41,7 @@ describe('키오스크 버전', () => {
 
   it('2단계: 손가락 없이 윤곽 가이드만, 따라가면 성공', () => {
     const { container } = run('stage2-v1', missions['fastfood-s2']);
+    fireEvent.click(screen.getByText('따라서 해볼래요'));
     fireEvent.click(screen.getByText('시작하기'));
     expect(container.querySelector('.kiosk[data-stage="2"]')).toBeTruthy();
     expect(container.querySelector('.guide-hand')).toBeNull();
@@ -66,6 +68,7 @@ describe('App 라우팅', () => {
   it('홈 → 키오스크 (서버 없으면 번들 콘텐츠 사용)', async () => {
     render(<App />);
     fireEvent.click(await screen.findByText('2단계 · 살짝 도움 받기'));
+    fireEvent.click(await screen.findByText('도움이 필요해요'));
     expect(await screen.findByText(/새우버거 세트/)).toBeTruthy();
   });
 });

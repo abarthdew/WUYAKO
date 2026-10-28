@@ -5,16 +5,16 @@ import './KioskButton.css';
 
 // escape: 처음으로·닫기·뒤로 같은 탈출 버튼. 가이드 중에도 항상 동작한다.
 export default function KioskButton({ id, variant = 'default', className = '', escape = false, onClick, children, ...rest }) {
-  const { stage, target, screen, onOffGuide } = useStage();
+  const { stage, target, screen, blockOffGuide, onOffGuide } = useStage();
   const track = useTrack();
   const isTarget = id && id === target;
   const handleClick = (e) => {
     // 누른 곳과 그때 가이드가 가리킨 곳을 원물로 남긴다
     track('tap', { targetId: id ?? null, screen, guideTargetId: target ?? null });
-    // 가이드 단계에서 엉뚱한 버튼: 동작하지 않고 말풍선으로 안내
+    // 가이드 단계에서 엉뚱한 버튼: 알리고, '도움이 필요해요'면 동작 대신 말풍선
     if (target && !isTarget && !escape && stage?.guide !== 'none') {
       onOffGuide?.();
-      return;
+      if (blockOffGuide) return;
     }
     onClick?.(e);
   };
