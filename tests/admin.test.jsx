@@ -56,3 +56,29 @@ describe('관리자 · 업종 테마', () => {
     expect(await screen.findByText('관리자 키')).toBeTruthy();
   });
 });
+
+describe('관리자 · 대시보드', () => {
+  it('기간을 바꾸면 다시 불러오고, 등록된 위젯을 그린다', async () => {
+    const data = {
+      range: {},
+      kpis: { sessions: 12, kioskStarts: 5, stage3SuccessRate: 0.4, stage3Submits: 5, shareClicks: 2 },
+      daily: [{ day: '2026-10-27', count: 3 }, { day: '2026-10-28', count: 9 }],
+      stages: [{ stage: 3, starts: 5, submits: 5, successes: 2, successRate: 0.4, medianDurationMs: 95000, offGuideTaps: 0 }],
+      stagesByMode: [],
+      lessons: [{ lessonId: 'pictogram', starts: 4, dones: 2, answers: 8, correct: 6, completionRate: 0.5, accuracy: 0.75 }],
+      sources: [{ source: 'kakao', campaign: 'home', count: 7 }],
+      shares: [{ place: 'home', method: 'copy', count: 2 }],
+    };
+    const urls = mockApi([
+      ['GET', /\/admin\/session$/, () => ({ ok: true })],
+      ['GET', /\/metrics\/overview\?days=/, () => data],
+    ]);
+    render(<AdminPage />);
+    expect((await screen.findAllByText('40%')).length).toBe(2); // 요약 + 단계 표
+    expect(screen.getByText('1분 35초')).toBeTruthy();
+    expect(screen.getByText('비슷한 버튼 찾기')).toBeTruthy();
+    expect(screen.getByLabelText('2026-10-28 9세션')).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: '최근 30일' }));
+    await waitFor(() => expect(urls.some((c) => /days=30/.test(c.url))).toBe(true));
+  });
+});
