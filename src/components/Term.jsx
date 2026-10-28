@@ -5,11 +5,11 @@ import './Term.css';
 export default function Term({ easy, real }) {
   const { stage } = useStage();
   const mode = stage?.termMode ?? 'real';
-  if (mode === 'real' || !easy || easy === real) return <span className="term">{real}</span>;
+  if (mode === 'real' || !easy || easy === real) return <span className="term" data-label>{real}</span>;
   const [big, small] = mode === 'easy' ? [easy, real] : [real, easy];
   return (
     <span className="term term--dual">
-      <span className="term__big">{big}</span>
+      <span className="term__big" data-label>{big}</span>
       <span className="term__small">{small}</span>
     </span>
   );

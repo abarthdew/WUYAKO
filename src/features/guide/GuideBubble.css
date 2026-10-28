@@ -1,0 +1,64 @@
+.guide-bubble {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  z-index: 40; /* 음영(10)·가이드 대상(20)·팝업(30) 위 */
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px;
+  border: var(--border);
+  border-radius: 14px;
+  background: var(--neon);
+  box-shadow: var(--shadow);
+  animation: bubble-in 0.2s ease-out both;
+}
+.guide-bubble--below {
+  top: var(--bubble-y);
+}
+.guide-bubble--above {
+  bottom: var(--bubble-y);
+}
+/* 꼬리: 누를 버튼 쪽을 가리킨다 */
+.guide-bubble::after {
+  content: '';
+  position: absolute;
+  left: calc(var(--tail-x) - 12px - 12px);
+  width: 20px;
+  height: 20px;
+  border: var(--border);
+  background: var(--neon);
+  transform: rotate(45deg);
+}
+.guide-bubble--below::after {
+  top: -12px;
+  border-right: 0;
+  border-bottom: 0;
+}
+.guide-bubble--above::after {
+  bottom: -12px;
+  border-left: 0;
+  border-top: 0;
+}
+.guide-bubble p {
+  margin: 0;
+}
+.guide-bubble__title {
+  font-family: var(--font-display);
+  font-size: 22px;
+}
+.guide-bubble__close {
+  justify-self: end;
+  min-height: 48px;
+  padding: 0 20px;
+  border: var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--card);
+  font-weight: 700;
+  cursor: pointer;
+}
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}

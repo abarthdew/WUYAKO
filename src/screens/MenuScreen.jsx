@@ -40,7 +40,7 @@ export default function MenuScreen({ state, store, dispatch, onAdd, onCancel }) 
           <li key={m.id}>
             <KioskButton id={`menu-${m.id}`} className="menu__item" onClick={() => pick(m)}>
               <MenuImage item={m} />
-              <span className="menu__name">{m.name}</span>
+              <span className="menu__name" data-label>{m.name}</span>
               <span className="menu__price">{won(m.price)}</span>
             </KioskButton>
           </li>
@@ -48,7 +48,7 @@ export default function MenuScreen({ state, store, dispatch, onAdd, onCancel }) 
       </ul>
 
       <footer className="menu__bar">
-        <KioskButton id="order-cancel" variant="ghost" onClick={onCancel}>
+        <KioskButton id="order-cancel" variant="ghost" escape onClick={onCancel}>
           <Term easy="처음부터" real="처음으로" />
         </KioskButton>
         <span className="menu__total">
