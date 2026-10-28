@@ -1,6 +1,6 @@
 const KEY = 'wuyako.events';
 
-// 브라우저 안에만 쌓인다. 실제 지표 집계는 서버 어댑터로 교체 후 가능.
+// 브라우저 안에만 쌓인다. 서버 없이 개발할 때용.
 export const localAdapter = {
   send(event) {
     try {

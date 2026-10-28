@@ -7,15 +7,25 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "dev:api": "node --env-file=.env --watch server/index.js",
+    "db:local": "node scripts/db-local.js",
+    "db:migrate": "node --env-file=.env -e \"import('./server/db/migrate.js').then(m=>m.migrate()).then(a=>{console.log(a);process.exit(0)})\"",
+    "db:seed": "node --env-file=.env scripts/seed.js",
+    "db:export": "node --env-file=.env scripts/export.js",
+    "db:dump": "mkdir -p backups && pg_dump \"$DATABASE_URL\" -Fc -f backups/wuyako-$(date +%Y%m%d%H%M).dump"
   },
   "dependencies": {
+    "@hono/node-server": "^2.1.5",
+    "hono": "^4.13.14",
+    "pg": "^8.23.1",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },
   "devDependencies": {
     "@testing-library/react": "^16.3.3",
     "@vitejs/plugin-react": "^6.1.2",
+    "embedded-postgres": "^18.4.0-beta.17",
     "jsdom": "^30.1.3",
     "vite": "^8.3.5",
     "vitest": "^5.0.5"

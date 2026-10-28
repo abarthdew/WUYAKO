@@ -25,14 +25,14 @@ export default function App() {
   const stage = getStage(state.stageId);
   const mission = missions[stage.id];
   const target = stage.guide ? guideTarget(state, mission, store) : null;
-  const ctx = useMemo(() => ({ stage, target }), [stage, target]);
+  const ctx = useMemo(() => ({ stage, target, screen: state.screen }), [stage, target, state.screen]);
 
   useEffect(() => {
     track('screen_view', { stage: stage.id, screen: state.screen });
   }, [state.screen, stage.id]);
 
   const start = (stageId) => {
-    track('stage_start', { stage: stageId });
+    track('stage_start', { stage: stageId, missionKey: String(stageId), themeSlug: store.id });
     dispatch({ type: 'START_STAGE', stageId });
   };
 
@@ -42,13 +42,9 @@ export default function App() {
   };
 
   const pay = () => {
-    const result = checkMission(mission, state);
-    track('order_complete', {
-      stage: stage.id,
-      success: result.success,
-      durationMs: Date.now() - (state.startedAt ?? Date.now()),
-    });
-    dispatch({ type: 'COMPLETE', result });
+    // 원물만 기록: 무엇을 골랐는지. 성공 여부는 읽을 때 미션과 비교해 계산.
+    track('order_submit', { dine: state.dine, cart: state.cart, payMethod: state.payMethod });
+    dispatch({ type: 'COMPLETE', result: checkMission(mission, state) });
   };
 
   const nextStageId = Object.keys(STAGES).map(Number).find((id) => id > stage.id);
