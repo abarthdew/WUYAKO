@@ -1,0 +1,16 @@
+{
+  "title": "기본 원리는 3단계만 기억하세요!",
+  "intro": "햄버거 가게든 기차역이든, 키오스크는 거의 다 이 순서예요.",
+  "steps": [
+    { "id": "pick", "no": 1, "name": "고르기", "icon": "👆", "says": "먹고 싶은 것, 가고 싶은 곳을 골라요." },
+    { "id": "check", "no": 2, "name": "고른 것 확인", "icon": "🛒", "says": "고른 것과 개수, 금액이 맞는지 확인해요." },
+    { "id": "pay", "no": 3, "name": "결제", "icon": "💳", "says": "카드를 꽂거나 휴대폰을 대서 돈을 내요." }
+  ],
+  "quiz": [
+    { "id": "cafe-menu", "industry": "카페", "caption": "음료 그림이 여러 개 있어요", "mock": "grid", "icons": ["☕", "🧋", "🍵", "🥤"], "answer": "pick" },
+    { "id": "movie-check", "industry": "영화관", "caption": "고른 자리와 금액이 적혀 있어요", "mock": "list", "icons": ["🎬", "💺"], "answer": "check" },
+    { "id": "ktx-pay", "industry": "기차표", "caption": "'카드를 넣어 주세요'라고 나와요", "mock": "pay", "icons": ["💳"], "answer": "pay" },
+    { "id": "bus-pick", "industry": "버스표", "caption": "가는 곳 이름이 여러 개 있어요", "mock": "grid", "icons": ["🏙️", "🏞️", "🏖️", "⛰️"], "answer": "pick" },
+    { "id": "burger-cart", "industry": "햄버거", "caption": "담은 메뉴 목록이 나와요", "mock": "list", "icons": ["🍔", "🍟"], "answer": "check" }
+  ]
+}
