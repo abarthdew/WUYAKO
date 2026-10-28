@@ -1,5 +1,10 @@
 import { getPool } from '../db/pool.js';
 
+export const findAsset = async (id) => {
+  const { rows } = await getPool().query('select * from assets where id = $1', [id]);
+  return rows[0] ?? null;
+};
+
 // 파일 메타데이터만 다룬다. 실제 업로드·스토리지 어댑터는 관리자 모드(ABTHDW-54)에서 추가.
 export const insertAsset = async ({ storageKey, originalName, mimeType, byteSize }) => {
   const { rows } = await getPool().query(

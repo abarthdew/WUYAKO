@@ -1,0 +1,19 @@
+.menu-img {
+  display: block;
+  object-fit: cover;
+  border-radius: 6px;
+}
+.menu-img--md {
+  width: 72px;
+  height: 72px;
+}
+.menu-img--sm {
+  width: 44px;
+  height: 44px;
+}
+.menu-emoji--md {
+  font-size: 48px;
+}
+.menu-emoji--sm {
+  font-size: 28px;
+}

@@ -26,6 +26,12 @@ npm run build       # dist/ 정적 빌드
 | `npm run db:export` | 테이블별 NDJSON 내보내기 → `backups/` |
 | `npm run db:dump` | `pg_dump` 백업 (pg_dump 설치 환경) |
 
+## 관리자
+
+- 주소: `#/admin` (홈에 링크 없음). `ADMIN_TOKEN`을 관리자 키로 입력, 로컬에서 비워 두면 아무 값이나 통과.
+- 업종 테마: 가게 이름·메뉴 종류·메뉴(가격·이모지·이미지)·세트 옵션 편집, 초안 저장 / 저장하고 게시, 미리보기(기록 안 함).
+- 이미지: png·jpg·webp·gif, 5MB 이하. 저장소는 `server/storage/`(현재 로컬 디스크 `UPLOAD_DIR`).
+
 ## 데이터 원칙
 
 - PostgreSQL 표준 SQL만 사용. 연결은 `DATABASE_URL` 하나 → 호스트(로컬·Supabase·RDS 등) 교체 시 이 값만 변경.

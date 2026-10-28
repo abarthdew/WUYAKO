@@ -1,4 +1,5 @@
 import Badge from '../components/Badge.jsx';
+import MenuImage from '../components/MenuImage.jsx';
 import KioskButton from '../components/KioskButton.jsx';
 import Term from '../components/Term.jsx';
 import { useStage } from '../app/StageContext.js';
@@ -38,7 +39,7 @@ export default function MenuScreen({ state, store, dispatch, onAdd, onCancel }) 
         {items.map((m) => (
           <li key={m.id}>
             <KioskButton id={`menu-${m.id}`} className="menu__item" onClick={() => pick(m)}>
-              <span className="menu__emoji" aria-hidden="true">{m.emoji}</span>
+              <MenuImage item={m} />
               <span className="menu__name">{m.name}</span>
               <span className="menu__price">{won(m.price)}</span>
             </KioskButton>

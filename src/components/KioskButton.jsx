@@ -1,10 +1,11 @@
 import { useStage } from '../app/StageContext.js';
-import { track } from '../features/analytics/analytics.js';
+import { useTrack } from '../features/analytics/TrackingContext.js';
 import GuideHand from '../features/guide/GuideHand.jsx';
 import './KioskButton.css';
 
 export default function KioskButton({ id, variant = 'default', className = '', onClick, children, ...rest }) {
   const { stage, target, screen } = useStage();
+  const track = useTrack();
   const isTarget = id && id === target;
   const handleClick = (e) => {
     // 누른 곳과 그때 가이드가 가리킨 곳을 원물로 남긴다

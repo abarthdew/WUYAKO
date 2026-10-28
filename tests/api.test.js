@@ -71,6 +71,52 @@ describe('API + PostgreSQL', () => {
     expect(metrics['1']).toMatchObject({ submits: 1, successes: 1, medianDurationMs: 30000 });
   });
 
+  it('관리자: 초안은 게시 전까지 공개 화면에 안 나오고, 게시하면 반영된다', async () => {
+    const theme = { id: 't1', storeName: '가게A', categories: [{ id: 'c', easy: '', real: '종류' }], menu: [{ id: 'm', category: 'c', name: '메뉴', price: 1000, emoji: '🍔' }] };
+    const save = (body, publish) =>
+      app.request('/api/admin/documents/theme/t1', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ body, publish }) });
+    expect((await save(theme, true)).status).toBe(200);
+    const draft = await (await save({ ...theme, storeName: '가게B' }, false)).json();
+    expect((await (await app.request('/api/content/theme/t1')).json()).body.storeName).toBe('가게A');
+    const latest = await (await app.request('/api/admin/documents/theme/t1')).json();
+    expect(latest.body.storeName).toBe('가게B');
+    expect(latest.revisions).toHaveLength(2);
+    await app.request('/api/admin/documents/theme/t1/publish', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ revisionId: draft.revisionId }) });
+    expect((await (await app.request('/api/content/theme/t1')).json()).body.storeName).toBe('가게B');
+    const bad = await save({ ...theme, menu: [{ ...theme.menu[0], price: -1 }] }, true);
+    expect(bad.status).toBe(400);
+    expect((await bad.json()).errors.length).toBeGreaterThan(0);
+  });
+
+  it('관리자: 이미지 업로드 → 공개 URL로 읽기, 허용 안 된 형식은 400', async () => {
+    const { setStorage } = await import('../server/storage/index.js');
+    const files = new Map();
+    setStorage({ put: async (k, b) => files.set(k, b), get: async (k) => files.get(k) ?? null });
+    const png = new Uint8Array([0x89, 0x50, 0x4e, 0x47]);
+    const form = new FormData();
+    form.append('file', new File([png], 'a.png', { type: 'image/png' }));
+    const res = await app.request('/api/admin/assets', { method: 'POST', body: form });
+    expect(res.status).toBe(200);
+    const { id } = await res.json();
+    const got = await app.request(`/api/assets/${id}`);
+    expect(got.headers.get('content-type')).toBe('image/png');
+    expect(new Uint8Array(await got.arrayBuffer())).toEqual(png);
+
+    const svg = new FormData();
+    svg.append('file', new File(['<svg/>'], 'x.svg', { type: 'image/svg+xml' }));
+    expect((await app.request('/api/admin/assets', { method: 'POST', body: svg })).status).toBe(400);
+  });
+
+  it('ADMIN_TOKEN이 있으면 관리자 API는 토큰 필요', async () => {
+    process.env.ADMIN_TOKEN = 'secret';
+    try {
+      expect((await app.request('/api/admin/session')).status).toBe(401);
+      expect((await app.request('/api/admin/session', { headers: { authorization: 'Bearer secret' } })).status).toBe(200);
+    } finally {
+      delete process.env.ADMIN_TOKEN;
+    }
+  });
+
   it('잘못된 요청은 400', async () => {
     expect((await post('/track/events', { sessionId: 'x', events: [] })).status).toBe(400);
     const sessionId = crypto.randomUUID();
