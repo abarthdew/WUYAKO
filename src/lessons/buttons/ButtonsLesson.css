@@ -1,0 +1,73 @@
+.btn-lesson__intro {
+  margin: 0;
+  color: var(--ink-2);
+}
+.btn-lesson__card {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 20px 16px;
+  border: var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+.btn-lesson__icon {
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  border: var(--border);
+  border-radius: var(--radius);
+  background: var(--paper-2);
+  font-size: 56px;
+  line-height: 1;
+}
+.btn-lesson__name {
+  font-size: 28px;
+}
+.btn-lesson__real,
+.btn-lesson__says {
+  margin: 0;
+}
+.btn-lesson__real {
+  color: var(--ink-3);
+  font-size: 16px;
+}
+.btn-lesson__try {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border: 2px dashed var(--ink-3);
+  border-radius: var(--radius);
+}
+.btn-lesson__try h3 {
+  font-size: 20px;
+}
+.btn-lesson__cheer {
+  margin: 0;
+  justify-self: center;
+  padding: 2px 12px;
+  background: var(--neon);
+  font-weight: 700;
+  animation: done-pop 0.4s ease-out both;
+}
+.btn-lesson__next {
+  min-height: 64px;
+  border: var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--awning);
+  color: var(--card);
+  box-shadow: var(--shadow);
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn-lesson__next:disabled {
+  background: var(--disabled);
+  color: var(--ink-3);
+  border-color: var(--ink-3);
+  box-shadow: none;
+  cursor: not-allowed;
+}

@@ -1,0 +1,14 @@
+{
+  "title": "이것만 알면 어떤 키오스크든 쓸 수 있어요!",
+  "intro": "키오스크마다 생김새는 달라도, 자주 나오는 버튼은 거의 같아요. 하나씩 눌러 볼까요?",
+  "items": [
+    { "id": "menu", "icon": "☰", "name": "줄 세 개 버튼", "realName": "메뉴(햄버거) 버튼", "says": "숨어 있는 목록을 열어요. 줄 세 개는 '더 보기'라는 뜻이에요.", "demo": "open-menu" },
+    { "id": "back", "icon": "‹", "name": "뒤로 가기", "realName": "이전", "says": "바로 전 화면으로 돌아가요. 잘못 눌렀을 때 쓰세요.", "demo": "back" },
+    { "id": "close", "icon": "×", "name": "닫기", "realName": "닫기(X)", "says": "갑자기 뜬 창을 닫아요. 창의 오른쪽 위 구석을 찾아보세요.", "demo": "close-popup" },
+    { "id": "cart", "icon": "🛒", "name": "담은 것 보기", "realName": "장바구니", "says": "고른 것이 모여 있는 곳이에요. 빨간 숫자는 고른 개수예요.", "demo": "badge" },
+    { "id": "tab", "icon": "🏷️", "name": "이름표", "realName": "탭(카테고리)", "says": "이름표를 누르면 다른 종류의 물건이 나와요.", "demo": "tabs" },
+    { "id": "swipe", "icon": "👉", "name": "옆으로 넘기기", "realName": "스와이프", "says": "화면에 손가락을 대고 옆으로 쓱 밀면 다음 장이 나와요.", "demo": "swipe" },
+    { "id": "disabled", "icon": "⬜", "name": "회색 버튼", "realName": "비활성 버튼", "says": "아직 누를 수 없다는 뜻이에요. 먼저 할 일을 하면 색이 바뀌어요.", "demo": "disabled" },
+    { "id": "home", "icon": "🏠", "name": "처음으로", "realName": "처음으로(홈)", "says": "모두 취소하고 맨 처음 화면으로 가요. 막히면 이걸 누르세요.", "demo": "tap" }
+  ]
+}

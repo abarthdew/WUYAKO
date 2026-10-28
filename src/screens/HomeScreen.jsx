@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { navigate } from '../app/router.js';
 import { listPublished } from '../content/api.js';
 import { listVersions } from '../kiosk/versions/registry.js';
+import { listLessons } from '../lessons/registry.js';
 import { getStage } from '../features/stage/stages.js';
 import './HomeScreen.css';
 
@@ -36,6 +37,20 @@ export default function HomeScreen() {
         </label>
       )}
 
+      <h2 className="home__section">원리 배우기</h2>
+      <div className="home__stages">
+        {listLessons().map((l) => (
+          <button key={l.id} type="button" className="home__stage" onClick={() => navigate(`/lesson/${l.id}`)}>
+            <span className="home__stage-no">{l.icon}</span>
+            <span className="home__stage-text">
+              <span>{l.title}</span>
+              <small>{l.summary}</small>
+            </span>
+          </button>
+        ))}
+      </div>
+
+      <h2 className="home__section">키오스크 연습</h2>
       <div className="home__stages">
         {listVersions().map((v) => {
           const s = getStage(v.stage);

@@ -1,0 +1,33 @@
+.lesson-done {
+  display: grid;
+  gap: 16px;
+  text-align: center;
+}
+.lesson-done__burst {
+  font-size: 88px;
+  animation: done-pop 0.6s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+.lesson-done h2 {
+  justify-self: center;
+  padding: 0 12px;
+  background: var(--neon);
+  font-size: 32px;
+}
+.lesson-done__actions {
+  display: grid;
+  gap: 10px;
+}
+.lesson-done__actions button {
+  min-height: 64px;
+  border: var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--card);
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.lesson-done__actions .is-primary {
+  background: var(--awning);
+  color: var(--card);
+  box-shadow: var(--shadow);
+}
