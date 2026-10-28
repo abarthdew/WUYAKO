@@ -1,8 +1,9 @@
 import ShareButton from '../components/ShareButton.jsx';
 import { describeLine } from '../features/cart/cart.js';
+import { describeMistakes } from '../features/mission/describeMistakes.js';
 import './DoneScreen.css';
 
-export default function DoneScreen({ result, store, mission, onRetry, onNext, onHome }) {
+export default function DoneScreen({ result, store, mission, offGuideTaps = 0, onRetry, onNext, onHome }) {
   const nameOf = (key) => {
     const [menuId, set, drinkId] = key.split('|');
     return describeLine({ menuId, set: set === '1', drinkId: drinkId || null, qty: 1 }, store);
@@ -33,6 +34,22 @@ export default function DoneScreen({ result, store, mission, onRetry, onNext, on
           <h2 className="done__title">주문은 됐어요!</h2>
           <p>미션과 조금 달라요. 한 번 더 해 볼까요?</p>
         </>
+      )}
+
+      {!result.success && (
+        <section className="done__mistakes" aria-label="틀린 곳">
+          <h3>틀린 곳</h3>
+          <ul>
+            {describeMistakes(result, mission, nameOf).map((m) => (
+              <li key={m.key}>{m.text}</li>
+            ))}
+          </ul>
+        </section>
+      )}
+      {offGuideTaps > 0 && (
+        <p className="done__offguide">
+          반짝이는 곳과 다른 곳을 <strong>{offGuideTaps}번</strong> 눌렀어요. 다음엔 반짝이는 곳을 따라가 보세요.
+        </p>
       )}
 
       <table className="done__table">
