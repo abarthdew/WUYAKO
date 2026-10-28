@@ -1,0 +1,15 @@
+{
+  "eyebrow": "키오스크 외우지 마세요",
+  "title": "읽는 법을 배우세요",
+  "lead": "틀려도 괜찮아요. 몇 번이든 다시 해 보세요.",
+  "slots": [
+    { "id": "h1", "type": "heading", "text": "원리 배우기", "visible": true },
+    { "id": "l1", "type": "lesson", "ref": "buttons", "visible": true },
+    { "id": "l2", "type": "lesson", "ref": "three-steps", "visible": true },
+    { "id": "l3", "type": "lesson", "ref": "pictogram", "visible": true },
+    { "id": "h2", "type": "heading", "text": "키오스크 연습", "visible": true },
+    { "id": "k1", "type": "kiosk", "ref": "stage1-v1", "theme": "fastfood", "visible": true },
+    { "id": "k2", "type": "kiosk", "ref": "stage2-v1", "theme": "fastfood", "visible": true },
+    { "id": "k3", "type": "kiosk", "ref": "stage3-v1", "theme": "fastfood", "visible": true }
+  ]
+}

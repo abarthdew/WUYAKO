@@ -30,6 +30,7 @@ npm run build       # dist/ 정적 빌드
 
 - 주소: `#/admin` (홈에 링크 없음). `ADMIN_TOKEN`을 관리자 키로 입력, 로컬에서 비워 두면 아무 값이나 통과.
 - 업종 테마: 가게 이름·메뉴 종류·메뉴(가격·이모지·이미지)·세트 옵션 편집, 초안 저장 / 저장하고 게시, 미리보기(기록 안 함).
+- 메인 화면: `#/admin/layout`에서 칸(제목·원리 배우기·키오스크 연습) 추가·순서·보이기·설정, 초안/게시, 미리보기.
 - 이미지: png·jpg·webp·gif, 5MB 이하. 저장소는 `server/storage/`(현재 로컬 디스크 `UPLOAD_DIR`).
 
 ## 데이터 원칙
@@ -47,6 +48,9 @@ src/
   kiosk/        주문 흐름 실행기(KioskRunner), 세션 reducer
     versions/   화면 버전 등록부(registry.js) — stage{n}-v{m}
   content/      게시 콘텐츠 읽기(API, 실패 시 번들 대체)
+  home/         메인 화면: 구성 문서(layout/home) 렌더러 + 칸 종류 등록부(slotTypes)
+  lessons/      구조 학습 모듈 등록부 + ① buttons ② threeSteps ③ pictogram
+  admin/        관리자 화면 (theme, layout)
   screens/      화면 단위 (Home, Mission, Idle, Dine, Menu, Cart, Payment, Done + 팝업)
   components/   공용 UI (KioskButton, Term, Badge, Popup, KioskFrame ...)
   features/

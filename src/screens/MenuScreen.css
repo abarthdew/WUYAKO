@@ -6,15 +6,16 @@
 }
 .menu__tabs {
   display: flex;
+  flex-wrap: wrap; /* 큰 글씨에서도 잘리지 않게 줄바꿈 */
   gap: 8px;
   padding: 12px;
-  overflow-x: auto;
   border-bottom: var(--border);
   background: var(--paper);
 }
 .menu__tabs .kbtn {
-  flex: 1 0 auto;
+  flex: 1 1 40%;
   font-weight: 700;
+  word-break: keep-all;
 }
 .menu__grid {
   display: grid;
@@ -63,11 +64,15 @@
 }
 .menu--side .menu__tabs {
   flex-direction: column;
+  flex-wrap: nowrap;
+  padding: 8px 6px;
   border-bottom: 0;
   border-right: var(--border);
 }
 .menu--side .menu__tabs .kbtn {
   flex: 0 0 auto;
+  min-width: 0;
+  padding: 8px 4px;
 }
 .menu--side .menu__grid {
   grid-template-columns: repeat(3, 1fr);

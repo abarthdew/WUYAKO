@@ -1,8 +1,10 @@
+import { validateLayout } from '../../src/features/layout/validateLayout.js';
 import { validateTheme } from '../../src/features/theme/validateTheme.js';
 
 // kind별 본문 검사. 등록되지 않은 kind는 객체인지만 본다.
 const VALIDATORS = {
   theme: validateTheme,
+  layout: (body) => validateLayout(body),
 };
 
 export const validateBody = (kind, body) => {

@@ -65,7 +65,18 @@ describe('키오스크 버전', () => {
 describe('App 라우팅', () => {
   it('홈 → 키오스크 (서버 없으면 번들 콘텐츠 사용)', async () => {
     render(<App />);
-    fireEvent.click(screen.getByText('2단계 · 살짝 도움 받기'));
+    fireEvent.click(await screen.findByText('2단계 · 살짝 도움 받기'));
     expect(await screen.findByText(/새우버거 세트/)).toBeTruthy();
+  });
+});
+
+describe('문서 전환', () => {
+  it('학습을 바꿔 이동해도 이전 학습 내용으로 그리지 않는다', async () => {
+    window.location.hash = '#/lesson/buttons';
+    render(<App />);
+    await screen.findByText('직접 해 보세요');
+    window.location.hash = '#/lesson/three-steps';
+    window.dispatchEvent(new HashChangeEvent('hashchange'));
+    expect(await screen.findByText('기본 원리는 3단계만 기억하세요!')).toBeTruthy();
   });
 });
