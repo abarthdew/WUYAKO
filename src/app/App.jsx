@@ -1,5 +1,6 @@
 import HomeScreen from '../screens/HomeScreen.jsx';
 import KioskPage from '../pages/KioskPage.jsx';
+import LessonPage from '../pages/LessonPage.jsx';
 import Notice from '../components/Notice.jsx';
 import { navigate, useRoute } from './router.js';
 import './App.css';
@@ -12,6 +13,7 @@ export default function App() {
   const page = (() => {
     if (!section) return <HomeScreen />;
     if (section === 'kiosk') return <KioskPage versionId={id} themeSlug={query.theme} />;
+    if (section === 'lesson') return <LessonPage lessonId={id} />;
     return <Notice text="없는 화면이에요." onHome={() => navigate('/')} />;
   })();
 

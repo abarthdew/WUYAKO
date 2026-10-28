@@ -1,5 +1,5 @@
 import { isDeepStrictEqual } from 'node:util';
-import { readFile } from 'node:fs/promises';
+import { readdir, readFile } from 'node:fs/promises';
 import { closePool } from '../server/db/pool.js';
 import { migrate } from '../server/db/migrate.js';
 import { findPublished, saveAndPublish } from '../server/repos/documents.js';
@@ -10,6 +10,13 @@ const load = async (path) => JSON.parse(await readFile(new URL(path, import.meta
 const seeds = [
   { kind: 'theme', slug: 'fastfood', body: await load('../src/data/fastfood.json') },
   ...Object.entries(await load('../src/data/missions.json')).map(([slug, body]) => ({ kind: 'mission', slug, body })),
+  ...(await Promise.all(
+    (await readdir(new URL('../src/data/lessons/', import.meta.url))).map(async (f) => ({
+      kind: 'lesson',
+      slug: f.replace(/\.json$/, ''),
+      body: await load(`../src/data/lessons/${f}`),
+    })),
+  )),
 ];
 
 await migrate();

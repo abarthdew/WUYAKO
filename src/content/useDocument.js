@@ -7,6 +7,10 @@ export const useDocument = (kind, slug) => {
   useEffect(() => {
     let alive = true;
     setState({ status: 'loading', data: null });
+    if (!slug) {
+      setState({ status: 'ready', data: null });
+      return undefined;
+    }
     fetchPublished(kind, slug).then((data) => alive && setState({ status: 'ready', data }));
     return () => {
       alive = false;

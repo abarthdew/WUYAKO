@@ -1,0 +1,103 @@
+/* 체험 공통: 작은 가상 화면 */
+.demo {
+  position: relative;
+  min-height: 180px;
+  border: var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  overflow: hidden;
+}
+.demo__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px;
+  background: var(--ink);
+  color: var(--card);
+}
+.demo__body {
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  min-height: 130px;
+  padding: 12px;
+  text-align: center;
+}
+.demo__btn {
+  min-width: 56px;
+  min-height: 56px;
+  padding: 0 12px;
+  border: var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--ink);
+  font-size: 26px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.demo__btn.is-on {
+  background: var(--ink);
+  color: var(--neon);
+}
+.demo__btn:disabled {
+  background: var(--disabled);
+  color: var(--ink-3);
+  border-color: var(--ink-3);
+  cursor: not-allowed;
+}
+.demo__hint {
+  margin: 0;
+  font-size: 16px;
+  color: var(--ink-2);
+}
+.demo__drawer {
+  position: absolute;
+  inset: 0 30% 0 0;
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  padding: 12px;
+  border-right: var(--border);
+  background: var(--paper);
+  animation: drawer-in 0.25s ease-out both;
+}
+@keyframes drawer-in {
+  from {
+    transform: translateX(-100%);
+  }
+}
+.demo__popup {
+  position: absolute;
+  inset: 20px;
+  display: grid;
+  place-items: center;
+  border: var(--border);
+  border-radius: var(--radius);
+  background: var(--paper);
+  box-shadow: 0 4px 0 var(--ink);
+}
+.demo__popup .demo__btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+.demo__badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  min-width: 26px;
+  height: 26px;
+  border-radius: var(--radius-pill);
+  background: var(--red);
+  color: var(--card);
+  font-size: 15px;
+  line-height: 26px;
+}
+.demo__cart {
+  position: relative;
+  font-size: 40px;
+}
+.demo__big {
+  font-size: 40px;
+}
