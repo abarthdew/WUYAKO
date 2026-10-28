@@ -26,6 +26,12 @@ npm run build       # dist/ 정적 빌드
 | `npm run db:export` | 테이블별 NDJSON 내보내기 → `backups/` |
 | `npm run db:dump` | `pg_dump` 백업 (pg_dump 설치 환경) |
 
+## UI 미리보기 (임시)
+
+- main에 merge되면 GitHub Actions가 테스트 → 빌드 → GitHub Pages 배포: https://abarthdew.github.io/WUYAKO/
+- 서버 없이 동작: 콘텐츠는 번들, 학습 기록은 브라우저에만 저장. 관리자 화면은 저장 불가.
+- 끄기: 저장소 변수 `PAGES_ENABLED`를 `false`로.
+
 ## 관리자
 
 - 주소: `#/admin` (홈에 링크 없음). `ADMIN_TOKEN`을 관리자 키로 입력, 로컬에서 비워 두면 아무 값이나 통과.
