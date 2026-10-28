@@ -1,0 +1,82 @@
+.picto-lesson__intro {
+  margin: 0;
+  color: var(--ink-2);
+}
+.picto-lesson__prompt {
+  font-size: 24px;
+  line-height: 1.3;
+}
+.picto-lesson__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.picto-lesson__option {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  min-height: 88px;
+  border: var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  color: var(--ink);
+  cursor: pointer;
+}
+.picto-lesson__option.is-picked {
+  background: var(--ink);
+  color: var(--neon);
+}
+.picto-lesson__option.is-right {
+  background: var(--neon);
+}
+.picto-lesson__option.is-missed {
+  outline: 5px solid var(--neon);
+  outline-offset: -5px;
+}
+.picto-lesson__option.is-wrong {
+  background: var(--paper-3);
+  color: var(--red);
+}
+.picto-lesson__option.is-right::after,
+.picto-lesson__option.is-wrong::after {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-size: 18px;
+  font-weight: 700;
+}
+.picto-lesson__option.is-right::after {
+  content: '○';
+}
+.picto-lesson__option.is-wrong::after {
+  content: '✕';
+}
+.picto-lesson__feedback {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: var(--paper-2);
+}
+.picto-lesson__feedback.is-ok {
+  background: var(--neon);
+}
+.picto-lesson__action {
+  min-height: 64px;
+  border: var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--awning);
+  color: var(--card);
+  box-shadow: var(--shadow);
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.picto-lesson__action:disabled {
+  background: var(--disabled);
+  color: var(--ink-3);
+  border-color: var(--ink-3);
+  box-shadow: none;
+  cursor: not-allowed;
+}
