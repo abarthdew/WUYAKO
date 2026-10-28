@@ -32,6 +32,13 @@ npm run build       # dist/ 정적 빌드
 - 서버 없이 동작: 콘텐츠는 번들, 학습 기록은 브라우저에만 저장. 관리자 화면은 저장 불가.
 - 끄기: 저장소 변수 `PAGES_ENABLED`를 `false`로.
 
+## 카톡 공유
+
+- 메인 화면 "부모님께 카톡으로 보내기", 미션 성공 화면 "카톡으로 자랑하기"
+- `VITE_KAKAO_JS_KEY`가 있으면 카카오 공유 → 없으면 휴대폰 공유창 → 링크 복사
+- 공유 링크에 `utm_source=kakao&utm_campaign={home|done}` → 유입 경로는 `sessions.entry_url`에서 읽을 때 계산
+- 카카오 키 발급 후 [카카오 개발자](https://developers.kakao.com)에 사이트 도메인 등록 필요
+
 ## 관리자
 
 - 주소: `#/admin` (홈에 링크 없음). `ADMIN_TOKEN`을 관리자 키로 입력, 로컬에서 비워 두면 아무 값이나 통과.

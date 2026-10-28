@@ -1,3 +1,4 @@
+import ShareButton from '../components/ShareButton.jsx';
 import { describeLine } from '../features/cart/cart.js';
 import './DoneScreen.css';
 
@@ -25,6 +26,7 @@ export default function DoneScreen({ result, store, mission, onRetry, onNext, on
           <div className="done__burst" aria-hidden="true">🎉</div>
           <h2 className="done__title">잘하셨어요!</h2>
           <p>미션 성공! 이제 가게에서도 할 수 있어요.</p>
+          <ShareButton place="done" label="카톡으로 자랑하기" text="나 키오스크 주문 성공했어! 우야꼬에서 연습했지 😎" />
         </>
       ) : (
         <>
