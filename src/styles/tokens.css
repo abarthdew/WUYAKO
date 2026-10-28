@@ -1,0 +1,31 @@
+/* 디자인 토큰 (참조: axchallenge.com 종이·잉크 톤) */
+:root {
+  --paper: #fbf3dc;
+  --paper-2: #f2e4be;
+  --paper-3: #e9d7a6;
+  --card: #fffdf6;
+  --ink: #16130f;
+  --ink-2: #4a4238;
+  --ink-3: #7a6f60;
+  --line: rgba(22, 19, 15, 0.16);
+  --neon: #e6ff00;
+  --awning: #e3626a;
+  --teal: #2b8a92;
+  --wood: #b98146;
+  --red: #d7263d;
+  --disabled: #d9cdb4;
+
+  --font-display: 'Black Han Sans', 'IBM Plex Sans KR', 'Malgun Gothic', sans-serif;
+  --font-body: 'IBM Plex Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+
+  --fs-body: 20px; /* 접근성: 본문 18px 이상 */
+  --fs-small: 15px;
+  --fs-title: clamp(28px, 7vw, 40px);
+  --touch-min: 64px; /* 접근성: 44px 이상 */
+
+  --radius: 8px;
+  --radius-pill: 100px;
+  --border: 2px solid var(--ink);
+  --shadow: 0 4px 0 var(--ink);
+  --shadow-press: 0 1px 0 var(--ink);
+}

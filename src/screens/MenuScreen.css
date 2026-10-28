@@ -1,0 +1,84 @@
+.menu {
+  flex: 1;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 0;
+}
+.menu__tabs {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  overflow-x: auto;
+  border-bottom: var(--border);
+  background: var(--paper);
+}
+.menu__tabs .kbtn {
+  flex: 1 0 auto;
+  font-weight: 700;
+}
+.menu__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-content: start;
+  gap: 12px;
+  margin: 0;
+  padding: 12px;
+  list-style: none;
+  overflow-y: auto;
+}
+.menu__item {
+  display: grid;
+  justify-items: center;
+  width: 100%;
+  padding: 12px 6px;
+}
+.menu__emoji {
+  font-size: 48px;
+}
+.menu__name {
+  font-weight: 700;
+}
+.menu__price {
+  color: var(--ink-2);
+  font-size: var(--fs-small);
+}
+.menu__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  border-top: var(--border);
+  background: var(--paper-2);
+}
+.menu__total {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 700;
+}
+
+/* 3단계: 카테고리를 왼쪽 세로로 옮겨 위치 암기를 깬다 */
+.menu--side {
+  grid-template-columns: 96px 1fr;
+  grid-template-rows: 1fr auto;
+}
+.menu--side .menu__tabs {
+  flex-direction: column;
+  border-bottom: 0;
+  border-right: var(--border);
+}
+.menu--side .menu__tabs .kbtn {
+  flex: 0 0 auto;
+}
+.menu--side .menu__grid {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  padding: 6px;
+}
+.menu--side .menu__emoji {
+  font-size: 32px;
+}
+.menu--side .menu__bar {
+  grid-column: 1 / -1;
+}

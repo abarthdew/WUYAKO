@@ -1,0 +1,8 @@
+.stage-timer {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--card);
+}
+.stage-timer.is-low {
+  color: var(--neon);
+}

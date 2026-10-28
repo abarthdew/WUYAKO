@@ -1,0 +1,12 @@
+.badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  border-radius: var(--radius-pill);
+  background: var(--red);
+  color: var(--card);
+  font-size: 16px;
+  font-weight: 700;
+}

@@ -1,0 +1,18 @@
+.guide-hand {
+  position: absolute;
+  right: -6px;
+  bottom: -30px;
+  font-size: 44px;
+  pointer-events: none;
+  filter: drop-shadow(2px 2px 0 var(--ink));
+  animation: guide-tap 1.2s ease-in-out infinite;
+}
+@keyframes guide-tap {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-6px, -10px) scale(0.92);
+  }
+}

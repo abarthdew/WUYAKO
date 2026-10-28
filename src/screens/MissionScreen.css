@@ -1,0 +1,28 @@
+.mission-screen {
+  display: grid;
+  gap: 24px;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 40px 16px;
+}
+.mission-screen__hint {
+  margin: 0;
+  color: var(--ink-2);
+}
+.mission-screen__go,
+.mission-screen__back {
+  min-height: 64px;
+  border: var(--border);
+  border-radius: var(--radius-pill);
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.mission-screen__go {
+  background: var(--awning);
+  color: var(--card);
+  box-shadow: var(--shadow);
+}
+.mission-screen__back {
+  background: transparent;
+}
