@@ -6,6 +6,18 @@ export default function DoneScreen({ result, store, mission, onRetry, onNext, on
     const [menuId, set, drinkId] = key.split('|');
     return describeLine({ menuId, set: set === '1', drinkId: drinkId || null, qty: 1 }, store);
   };
+  if (!result) {
+    return (
+      <main className="done is-success">
+        <div className="done__burst" aria-hidden="true">🎉</div>
+        <h2 className="done__title">주문 완료!</h2>
+        <div className="done__actions">
+          <button type="button" onClick={onRetry}>한 번 더</button>
+          <button type="button" onClick={onHome}>처음으로</button>
+        </div>
+      </main>
+    );
+  }
   return (
     <main className={`done ${result.success ? 'is-success' : ''}`}>
       {result.success ? (

@@ -4,12 +4,12 @@
   align-items: center;
   line-height: 1.2;
 }
-.term__real {
+.term__small {
   font-size: var(--fs-small);
   color: var(--ink-3);
 }
-.kbtn--selected .term__real,
-.kbtn--primary .term__real {
+.kbtn--selected .term__small,
+.kbtn--primary .term__small {
   color: inherit;
   opacity: 0.8;
 }

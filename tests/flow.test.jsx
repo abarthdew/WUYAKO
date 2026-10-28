@@ -1,31 +1,71 @@
 // @vitest-environment jsdom
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it } from 'vitest';
+import theme from '../src/data/fastfood.json';
+import missions from '../src/data/missions.json';
 import App from '../src/app/App.jsx';
+import KioskRunner from '../src/kiosk/KioskRunner.jsx';
+import { getVersion, listVersions } from '../src/kiosk/versions/registry.js';
 
-afterEach(cleanup);
-
-describe('1단계 흐름', () => {
-  it('가이드가 가리키는 곳만 누르면 미션에 성공한다', () => {
-    const { container } = render(<App />);
-    fireEvent.click(screen.getByText('1단계 · 따라 하기'));
-    fireEvent.click(screen.getByText('시작하기'));
-    for (let i = 0; i < 20; i += 1) {
-      const target = container.querySelector('.is-target');
-      if (!target) break;
-      expect(container.querySelectorAll('.is-target')).toHaveLength(1);
-      fireEvent.click(target);
-    }
-    expect(screen.getByText('잘하셨어요!')).toBeTruthy();
-  });
+afterEach(() => {
+  cleanup();
+  window.location.hash = '';
 });
 
-describe('3단계 흐름', () => {
-  it('가이드가 없다', () => {
-    const { container } = render(<App />);
-    fireEvent.click(screen.getByText('3단계 · 혼자 하기'));
+const run = (versionId, mission) =>
+  render(<KioskRunner version={getVersion(versionId)} theme={theme} mission={mission} missionKey="t" onExit={() => {}} />);
+
+// 가이드 대상만 계속 누른다
+const followGuide = (container) => {
+  for (let i = 0; i < 30; i += 1) {
+    const targets = container.querySelectorAll('.is-target');
+    if (!targets.length) return;
+    expect(targets).toHaveLength(1);
+    fireEvent.click(targets[0]);
+  }
+};
+
+describe('키오스크 버전', () => {
+  it('1·2·3단계 v1이 등록돼 있다', () => {
+    expect(listVersions().map((v) => v.id)).toEqual(['stage1-v1', 'stage2-v1', 'stage3-v1']);
+  });
+
+  it('1단계: 손가락 가이드만 따라가면 미션 성공', () => {
+    const { container } = run('stage1-v1', missions['fastfood-s1']);
+    fireEvent.click(screen.getByText('시작하기'));
+    expect(container.querySelector('.guide-hand')).toBeTruthy();
+    followGuide(container);
+    expect(screen.getByText('잘하셨어요!')).toBeTruthy();
+  });
+
+  it('2단계: 손가락 없이 윤곽 가이드만, 따라가면 성공', () => {
+    const { container } = run('stage2-v1', missions['fastfood-s2']);
+    fireEvent.click(screen.getByText('시작하기'));
+    expect(container.querySelector('.kiosk[data-stage="2"]')).toBeTruthy();
+    expect(container.querySelector('.guide-hand')).toBeNull();
+    expect(container.querySelector('.is-target')).toBeTruthy();
+    followGuide(container);
+    expect(screen.getByText('잘하셨어요!')).toBeTruthy();
+  });
+
+  it('3단계: 가이드 없음', () => {
+    const { container } = run('stage3-v1', missions['fastfood-s3']);
     fireEvent.click(screen.getByText('시작하기'));
     expect(container.querySelector('.is-target')).toBeNull();
     expect(container.querySelector('.kiosk[data-stage="3"]')).toBeTruthy();
+  });
+
+  it('미션이 없으면 자유 주문 모드', () => {
+    const { container } = run('stage1-v1', null);
+    fireEvent.click(screen.getByText('시작하기'));
+    expect(container.querySelector('.is-target')).toBeNull();
+  });
+});
+
+describe('App 라우팅', () => {
+  it('홈 → 키오스크 (서버 없으면 번들 콘텐츠 사용)', async () => {
+    render(<App />);
+    fireEvent.click(screen.getByText('2단계 · 살짝 도움 받기'));
+    expect(await screen.findByText(/새우버거 세트/)).toBeTruthy();
   });
 });

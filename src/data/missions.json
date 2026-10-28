@@ -1,10 +1,21 @@
 {
-  "1": {
+  "fastfood-s1": {
+    "theme": "fastfood",
+    "stage": 1,
     "text": "불고기버거 세트 1개를 사이다로 바꿔서, 매장에서 먹고 갈 거예요.",
     "dine": "in",
     "items": [{ "menuId": "bulgogi", "set": true, "drinkId": "cider", "qty": 1 }]
   },
-  "3": {
+  "fastfood-s2": {
+    "theme": "fastfood",
+    "stage": 2,
+    "text": "새우버거 세트 1개를 오렌지주스로 바꿔서 포장해 가세요.",
+    "dine": "out",
+    "items": [{ "menuId": "shrimp", "set": true, "drinkId": "orange", "qty": 1 }]
+  },
+  "fastfood-s3": {
+    "theme": "fastfood",
+    "stage": 3,
     "text": "치킨버거 단품 2개와 감자튀김 1개를 포장해 가세요.",
     "dine": "out",
     "items": [

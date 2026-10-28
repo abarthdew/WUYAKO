@@ -3,9 +3,9 @@ import store from '../src/data/fastfood.json';
 import missions from '../src/data/missions.json';
 import { checkMission } from '../src/features/mission/checkMission.js';
 import { guideTarget } from '../src/features/guide/guideTarget.js';
-import { initialState } from '../src/app/sessionReducer.js';
+import { initialState } from '../src/kiosk/sessionReducer.js';
 
-const m1 = missions['1'];
+const m1 = missions['fastfood-s1'];
 
 describe('checkMission', () => {
   it('미션과 같으면 성공', () => {

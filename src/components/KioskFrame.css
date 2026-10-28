@@ -35,6 +35,17 @@
   background: rgba(22, 19, 15, 0.35);
   pointer-events: none;
 }
+/* 2단계: 약간 큰 글씨 */
+.kiosk[data-stage='2'] {
+  --fs-body: 18px;
+  --fs-small: 14px;
+  --touch-min: 56px;
+  font-size: var(--fs-body);
+}
+/* 2단계 가이드: 손가락 없이 윤곽만, 깜빡임 없음 */
+.kiosk[data-stage='2'] .kbtn.is-target {
+  animation: none;
+}
 /* 3단계: 작은 글씨·빽빽한 화면으로 현실화 */
 .kiosk[data-stage='3'] {
   --fs-body: 16px;
