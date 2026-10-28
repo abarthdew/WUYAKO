@@ -1,0 +1,36 @@
+.share {
+  display: grid;
+  gap: 8px;
+}
+.share__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 64px;
+  padding: 0 20px;
+  border: var(--border);
+  border-radius: var(--radius-pill);
+  background: #fee500; /* 카톡을 떠올리는 노란색 */
+  color: var(--ink);
+  box-shadow: var(--shadow);
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.share__btn:active {
+  transform: translateY(3px);
+  box-shadow: var(--shadow-press);
+}
+.share__icon {
+  width: 28px;
+  height: 28px;
+  fill: var(--ink);
+}
+.share__notice {
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  background: var(--paper-2);
+  font-size: 16px;
+}
