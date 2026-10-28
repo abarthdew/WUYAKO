@@ -8,6 +8,7 @@ const nextNeededItem = (mission, cart) =>
   });
 
 export const guideTarget = (state, mission, store) => {
+  if (!mission) return null;
   const { screen, cart, option, category, payMethod } = state;
   switch (screen) {
     case 'idle':

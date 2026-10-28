@@ -4,7 +4,7 @@ import GuideHand from '../features/guide/GuideHand.jsx';
 import './KioskButton.css';
 
 export default function KioskButton({ id, variant = 'default', className = '', onClick, children, ...rest }) {
-  const { target, screen } = useStage();
+  const { stage, target, screen } = useStage();
   const isTarget = id && id === target;
   const handleClick = (e) => {
     // 누른 곳과 그때 가이드가 가리킨 곳을 원물로 남긴다
@@ -20,7 +20,7 @@ export default function KioskButton({ id, variant = 'default', className = '', o
       {...rest}
     >
       {children}
-      {isTarget && <GuideHand />}
+      {isTarget && stage?.guide === 'hand' && <GuideHand />}
     </button>
   );
 }

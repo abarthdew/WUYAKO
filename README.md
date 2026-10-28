@@ -36,11 +36,15 @@ npm run build       # dist/ 정적 빌드
 
 ```
 src/
-  app/          App, 세션 reducer(화면 흐름), StageContext
+  app/          App(라우팅), 해시 라우터, StageContext
+  pages/        라우트별 페이지 (콘텐츠를 불러와 하위 모듈에 주입)
+  kiosk/        주문 흐름 실행기(KioskRunner), 세션 reducer
+    versions/   화면 버전 등록부(registry.js) — stage{n}-v{m}
+  content/      게시 콘텐츠 읽기(API, 실패 시 번들 대체)
   screens/      화면 단위 (Home, Mission, Idle, Dine, Menu, Cart, Payment, Done + 팝업)
   components/   공용 UI (KioskButton, Term, Badge, Popup, KioskFrame ...)
   features/
-    stage/      단계 설정(stages.js) — 1단계·3단계 차이는 여기서만 정의
+    stage/      단계 기본 설정(stages.js) — 1·2·3단계 차이
     guide/      가이드 대상 계산(guideTarget.js), 손가락 애니메이션
     mission/    미션 카드, 정답 비교(checkMission.js)
     cart/       장바구니 순수 함수
@@ -63,4 +67,5 @@ tests/          vitest (순수 함수 + jsdom 흐름 + DB 통합)
 
 - 컴포넌트마다 `.jsx` + `.css` 분리, import로 연결.
 - 로직은 순수 함수(`features/*/*.js`)로 분리하고 화면은 표시만 담당.
-- 업종 확장: `data/`에 JSON 추가 + 미션 정의. 화면 코드는 재사용.
+- 업종 확장: 테마 문서(kind=theme) + 미션 문서(slug `{테마}-s{단계}`). 화면 코드는 재사용.
+- 화면 버전 추가: `kiosk/versions/`에 screens 묶음을 만들고 registry에 등록.

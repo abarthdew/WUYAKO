@@ -1,0 +1,17 @@
+.notice {
+  display: grid;
+  gap: 16px;
+  justify-items: center;
+  padding: 64px 16px;
+  text-align: center;
+}
+.notice button {
+  min-height: 64px;
+  padding: 0 28px;
+  border: var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--card);
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
