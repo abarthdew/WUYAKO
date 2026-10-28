@@ -18,8 +18,8 @@ export const setToken = (t) => {
   }
 };
 
-const request = async (path, init = {}) => {
-  const res = await fetch(`${base}/admin${path}`, {
+const request = async (path, init = {}, prefix = '/admin') => {
+  const res = await fetch(`${base}${prefix}${path}`, {
     ...init,
     headers: { ...(init.headers ?? {}), Authorization: `Bearer ${getToken()}` },
   });
@@ -36,6 +36,7 @@ export const adminApi = {
   getDocument: (kind, slug) => request(`/documents/${kind}/${slug}`),
   saveDocument: (kind, slug, body, publish) => request(`/documents/${kind}/${slug}`, json('POST', { body, publish })),
   publishRevision: (kind, slug, revisionId) => request(`/documents/${kind}/${slug}/publish`, json('POST', { revisionId })),
+  metricsOverview: (days) => request(`/overview?days=${days}`, {}, '/metrics'),
   uploadAsset: (file) => {
     const form = new FormData();
     form.append('file', file);

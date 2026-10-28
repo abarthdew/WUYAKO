@@ -29,3 +29,7 @@
   --shadow: 0 4px 0 var(--ink);
   --shadow-press: 0 1px 0 var(--ink);
 }
+:root {
+  /* 데이터 표현용 (검증: 밝기·채도·대비 통과, 단일 계열) */
+  --data-1: #1f7fd1;
+}

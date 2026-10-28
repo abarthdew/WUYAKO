@@ -33,3 +33,11 @@ export const fetchEvents = async ({ types, since } = {}) => {
   );
   return rows;
 };
+
+export const fetchSessions = async ({ since } = {}) => {
+  const { rows } = await getPool().query(
+    'select id, entry_url, received_at from sessions where ($1::timestamptz is null or received_at >= $1) order by received_at',
+    [since ?? null],
+  );
+  return rows;
+};
