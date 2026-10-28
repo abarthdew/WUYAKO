@@ -33,10 +33,10 @@ export default function PaymentScreen({ state, store, dispatch, onPaid }) {
       {payMethod && (
         <KioskButton id="pay-insert" variant="accent" className="pay__insert" onClick={onPaid}>
           <span className="pay__slot" aria-hidden="true">{payMethod === 'card' ? '💳⬇️' : '📱📶'}</span>
-          {payMethod === 'card' ? '카드를 꽂아 주세요 (눌러서 꽂기)' : '휴대폰을 대 주세요 (눌러서 대기)'}
+          <span data-label>{payMethod === 'card' ? '카드를 꽂아 주세요 (눌러서 꽂기)' : '휴대폰을 대 주세요 (눌러서 대기)'}</span>
         </KioskButton>
       )}
-      <KioskButton id="pay-back" variant="ghost" onClick={() => dispatch({ type: 'GO', screen: 'cart' })}>
+      <KioskButton id="pay-back" variant="ghost" escape onClick={() => dispatch({ type: 'GO', screen: 'cart' })}>
         ‹ <Term easy="뒤로" real="이전" />
       </KioskButton>
     </div>

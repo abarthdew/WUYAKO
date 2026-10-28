@@ -7,7 +7,7 @@ export default function IdleScreen({ onTouch }) {
       <span className="idle__emoji" aria-hidden="true">
         🍔
       </span>
-      <span className="idle__text">주문하시려면 화면을 터치하세요</span>
+      <span className="idle__text" data-label>주문하시려면 화면을 터치하세요</span>
     </KioskButton>
   );
 }

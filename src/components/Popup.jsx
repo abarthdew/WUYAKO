@@ -7,7 +7,7 @@ export default function Popup({ title, onClose, closeId = 'popup-close', childre
       <div className="popup">
         <header className="popup__head">
           <h3>{title}</h3>
-          <KioskButton id={closeId} variant="ghost" aria-label="닫기" onClick={onClose}>
+          <KioskButton id={closeId} variant="ghost" aria-label="닫기" escape onClick={onClose}>
             ×
           </KioskButton>
         </header>

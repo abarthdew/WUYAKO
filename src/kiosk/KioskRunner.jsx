@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useReducer } from 'react';
+import { useEffect, useMemo, useReducer, useState } from 'react';
 import KioskFrame from '../components/KioskFrame.jsx';
 import { StageContext } from '../app/StageContext.js';
 import { useTrack } from '../features/analytics/TrackingContext.js';
@@ -17,7 +17,17 @@ export default function KioskRunner({ version, theme, mission, missionKey, onExi
   const track = useTrack();
   const [state, dispatch] = useReducer(sessionReducer, { ...initialState, stageId: stage.id, screen: 'mission' });
   const target = stage.guide !== 'none' && mission ? guideTarget(state, mission, theme) : null;
-  const ctx = useMemo(() => ({ stage, target, screen: state.screen }), [stage, target, state.screen]);
+  const [bubble, setBubble] = useState(false);
+  const ctx = useMemo(
+    () => ({ stage, target, screen: state.screen, onOffGuide: () => setBubble(true) }),
+    [stage, target, state.screen],
+  );
+  // 올바른 곳을 눌러 다음 대상으로 넘어가면 말풍선을 닫는다
+  useEffect(() => setBubble(false), [target]);
+  const closeBubble = () => {
+    track('guide_bubble_close', { screen: state.screen, guideTargetId: target });
+    setBubble(false);
+  };
 
   useEffect(() => {
     track('screen_view', { stage: stage.id, versionId: version.id, screen: state.screen });
@@ -53,7 +63,7 @@ export default function KioskRunner({ version, theme, mission, missionKey, onExi
     <StageContext.Provider value={ctx}>
       {state.screen === 'mission' && <MissionScreen stage={stage} mission={mission} onBegin={begin} onBack={onExit} />}
       {KIOSK_SCREENS.includes(state.screen) && (
-        <KioskFrame storeName={theme.storeName} startedAt={state.startedAt}>
+        <KioskFrame storeName={theme.storeName} startedAt={state.startedAt} bubble={bubble} onCloseBubble={closeBubble}>
           {kioskScreen()}
         </KioskFrame>
       )}

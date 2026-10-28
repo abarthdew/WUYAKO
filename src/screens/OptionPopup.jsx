@@ -43,7 +43,7 @@ export default function OptionPopup({ option, store, dispatch, onAdd }) {
               variant={option.drinkId === d.id ? 'selected' : 'default'}
               onClick={() => set({ drinkId: d.id })}
             >
-              {d.name}
+              <span data-label>{d.name}</span>
               {d.extraPrice > 0 && <small> +{won(d.extraPrice)}</small>}
             </KioskButton>
           ))}

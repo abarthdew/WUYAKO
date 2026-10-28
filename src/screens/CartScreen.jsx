@@ -33,7 +33,7 @@ export default function CartScreen({ state, store, dispatch }) {
       </ul>
       <p className="cart__total">합계 {won(cartTotal(cart, store))}</p>
       <div className="cart__actions">
-        <KioskButton id="cart-back" onClick={() => dispatch({ type: 'GO', screen: 'menu' })}>
+        <KioskButton id="cart-back" escape onClick={() => dispatch({ type: 'GO', screen: 'menu' })}>
           ‹ <Term easy="더 고르기" real="추가 주문" />
         </KioskButton>
         <KioskButton
