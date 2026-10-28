@@ -1,0 +1,18 @@
+.kbtn.idle {
+  flex: 1;
+  display: grid;
+  place-content: center;
+  gap: 16px;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--awning);
+  color: var(--card);
+}
+.idle__emoji {
+  font-size: 96px;
+}
+.idle__text {
+  font-family: var(--font-display);
+  font-size: 28px;
+}

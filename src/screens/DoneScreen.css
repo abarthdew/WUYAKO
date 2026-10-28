@@ -1,0 +1,67 @@
+.done {
+  display: grid;
+  gap: 16px;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 32px 16px;
+  text-align: center;
+}
+.done p {
+  margin: 0;
+}
+.done__burst {
+  font-size: 96px;
+  animation: done-pop 0.6s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+.done__title {
+  font-size: var(--fs-title);
+}
+.done.is-success .done__title {
+  display: inline-block;
+  justify-self: center;
+  padding: 0 12px;
+  background: var(--neon);
+}
+@keyframes done-pop {
+  from {
+    transform: scale(0.2) rotate(-20deg);
+    opacity: 0;
+  }
+}
+.done__table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  border: var(--border);
+}
+.done__table caption {
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+.done__table th,
+.done__table td {
+  padding: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.done__table tr.ng td {
+  color: var(--red);
+  font-weight: 700;
+}
+.done__actions {
+  display: grid;
+  gap: 10px;
+}
+.done__actions button {
+  min-height: 64px;
+  border: var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--card);
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.done__actions .is-primary {
+  background: var(--awning);
+  color: var(--card);
+  box-shadow: var(--shadow);
+}

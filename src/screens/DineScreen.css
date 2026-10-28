@@ -1,0 +1,23 @@
+.dine {
+  flex: 1;
+  display: grid;
+  align-content: center;
+  gap: 24px;
+  padding: 24px 16px;
+  text-align: center;
+}
+.dine__choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.dine__choices .kbtn {
+  display: grid;
+  gap: 8px;
+  padding: 24px 8px;
+  font-size: 22px;
+  font-weight: 700;
+}
+.dine__icon {
+  font-size: 56px;
+}

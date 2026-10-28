@@ -1,0 +1,15 @@
+.term--dual {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.2;
+}
+.term__real {
+  font-size: var(--fs-small);
+  color: var(--ink-3);
+}
+.kbtn--selected .term__real,
+.kbtn--primary .term__real {
+  color: inherit;
+  opacity: 0.8;
+}

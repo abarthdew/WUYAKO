@@ -1,0 +1,44 @@
+.kiosk {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 480px;
+  min-height: min(100dvh, 860px);
+  margin: 0 auto;
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  background: var(--card);
+  overflow: hidden;
+}
+.kiosk__bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  background: var(--ink);
+  color: var(--card);
+  font-size: 14px;
+}
+.kiosk__screen {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+/* 음영 가이드: 대상만 밝게 (클릭은 막지 않음) */
+.kiosk.has-guide .kiosk__screen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: rgba(22, 19, 15, 0.35);
+  pointer-events: none;
+}
+/* 3단계: 작은 글씨·빽빽한 화면으로 현실화 */
+.kiosk[data-stage='3'] {
+  --fs-body: 16px;
+  --fs-small: 12px;
+  --touch-min: 48px;
+  font-size: var(--fs-body);
+}

@@ -1,0 +1,22 @@
+.opt__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.opt__row .kbtn {
+  display: grid;
+  gap: 4px;
+  font-weight: 700;
+}
+.opt__drinks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.opt__drinks legend {
+  margin-bottom: 8px;
+  font-weight: 700;
+}

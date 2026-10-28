@@ -1,0 +1,10 @@
+.speak-btn {
+  min-height: 48px;
+  padding: 6px 14px;
+  border: var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--card);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  cursor: pointer;
+}
