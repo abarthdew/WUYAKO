@@ -77,3 +77,38 @@ export const listRevisions = async (kind, slug) => {
   );
   return rows;
 };
+
+// 관리자용: 종류별 문서 목록 + 최신 리비전·게시 리비전
+export const listDocuments = async (kind) => {
+  const { rows } = await getPool().query(
+    `select d.slug,
+            (select id from document_revisions where document_id = d.id order by created_at desc limit 1) as latest_revision_id,
+            (select revision_id from document_publications where document_id = d.id order by published_at desc, id desc limit 1) as published_revision_id,
+            (select created_at from document_revisions where document_id = d.id order by created_at desc limit 1) as updated_at
+       from documents d where d.kind = $1 order by d.slug`,
+    [kind],
+  );
+  return rows;
+};
+
+// 관리자용: 최신 리비전(초안 포함) 본문
+export const findLatest = async (kind, slug) => {
+  const { rows } = await getPool().query(
+    `select r.id as revision_id, r.body, r.created_at,
+            (select revision_id from document_publications where document_id = d.id order by published_at desc, id desc limit 1) as published_revision_id
+       from documents d join document_revisions r on r.document_id = d.id
+      where d.kind = $1 and d.slug = $2
+      order by r.created_at desc limit 1`,
+    [kind, slug],
+  );
+  return rows[0] ?? null;
+};
+
+export const findRevision = async (kind, slug, revisionId) => {
+  const { rows } = await getPool().query(
+    `select r.id, r.document_id from document_revisions r join documents d on d.id = r.document_id
+      where d.kind = $1 and d.slug = $2 and r.id = $3`,
+    [kind, slug, revisionId],
+  );
+  return rows[0] ?? null;
+};

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useReducer } from 'react';
 import KioskFrame from '../components/KioskFrame.jsx';
 import { StageContext } from '../app/StageContext.js';
-import { track } from '../features/analytics/analytics.js';
+import { useTrack } from '../features/analytics/TrackingContext.js';
 import { guideTarget } from '../features/guide/guideTarget.js';
 import { checkMission } from '../features/mission/checkMission.js';
 import DoneScreen from '../screens/DoneScreen.jsx';
@@ -14,13 +14,14 @@ const KIOSK_SCREENS = ['idle', 'dine', 'menu', 'cart', 'payment'];
 // mission이 없으면 자유 주문 모드(가이드·채점 없음).
 export default function KioskRunner({ version, theme, mission, missionKey, onExit, onNext }) {
   const stage = version.config;
+  const track = useTrack();
   const [state, dispatch] = useReducer(sessionReducer, { ...initialState, stageId: stage.id, screen: 'mission' });
   const target = stage.guide !== 'none' && mission ? guideTarget(state, mission, theme) : null;
   const ctx = useMemo(() => ({ stage, target, screen: state.screen }), [stage, target, state.screen]);
 
   useEffect(() => {
     track('screen_view', { stage: stage.id, versionId: version.id, screen: state.screen });
-  }, [state.screen, stage.id, version.id]);
+  }, [state.screen, stage.id, version.id, track]);
 
   const begin = () => {
     track('stage_start', { stage: stage.id, versionId: version.id, missionKey: missionKey ?? null, themeSlug: theme.id });

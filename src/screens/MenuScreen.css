@@ -32,9 +32,7 @@
   width: 100%;
   padding: 12px 6px;
 }
-.menu__emoji {
-  font-size: 48px;
-}
+
 .menu__name {
   font-weight: 700;
 }
@@ -76,8 +74,12 @@
   gap: 6px;
   padding: 6px;
 }
-.menu--side .menu__emoji {
+.menu--side .menu-emoji--md {
   font-size: 32px;
+}
+.menu--side .menu-img--md {
+  width: 52px;
+  height: 52px;
 }
 .menu--side .menu__bar {
   grid-column: 1 / -1;

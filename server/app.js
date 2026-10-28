@@ -1,4 +1,6 @@
 import { Hono } from 'hono';
+import { adminRoutes } from './routes/admin.js';
+import { assetRoutes } from './routes/assets.js';
 import { contentRoutes } from './routes/content.js';
 import { metricsRoutes } from './routes/metrics.js';
 import { trackingRoutes } from './routes/tracking.js';
@@ -11,6 +13,8 @@ export const createApp = () =>
     .route('/content', contentRoutes)
     .route('/track', trackingRoutes)
     .route('/metrics', metricsRoutes)
+    .route('/admin', adminRoutes)
+    .route('/assets', assetRoutes)
     .onError((err, c) => {
       console.error(err);
       return c.json({ error: 'internal' }, 500);
