@@ -1,0 +1,34 @@
+{
+  "title": "비슷한 버튼을 찾아볼까요?",
+  "intro": "가게마다 버튼 그림이 조금씩 달라요. 생김새가 달라도 뜻이 같은 버튼을 모두 골라 보세요.",
+  "questions": [
+    {
+      "id": "cart",
+      "prompt": "'담은 것 보기(장바구니)' 버튼을 모두 고르세요",
+      "options": ["cart", "trash", "basket", "home", "bag", "gear"],
+      "answers": ["cart", "basket", "bag"],
+      "explain": "수레·바구니·쇼핑백은 모두 '담은 것'이에요. 쓰레기통은 '지우기'예요."
+    },
+    {
+      "id": "menu",
+      "prompt": "'숨은 메뉴 열기' 버튼을 모두 고르세요",
+      "options": ["lines", "search", "dots", "x", "grid", "chevron-left"],
+      "answers": ["lines", "dots", "grid"],
+      "explain": "줄 세 개, 점 세 개, 네모 네 개는 모두 '더 보기'예요."
+    },
+    {
+      "id": "back",
+      "prompt": "'뒤로 가기' 버튼을 모두 고르세요",
+      "options": ["chevron-right", "chevron-left", "home", "arrow-left", "x", "undo"],
+      "answers": ["chevron-left", "arrow-left", "undo"],
+      "explain": "왼쪽을 가리키면 '뒤로'예요. 오른쪽(›)은 '다음'이에요."
+    },
+    {
+      "id": "close",
+      "prompt": "'창 닫기' 버튼을 모두 고르세요",
+      "options": ["x", "plus", "x-circle", "check", "x-square", "minus"],
+      "answers": ["x", "x-circle", "x-square"],
+      "explain": "X 모양은 동그라미·네모 테두리가 있어도 '닫기'예요. +는 '더하기'예요."
+    }
+  ]
+}

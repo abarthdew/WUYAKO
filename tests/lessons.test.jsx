@@ -73,3 +73,30 @@ describe('구조 학습 ② 3단계 원리', () => {
     expect(screen.getByText(`${threeSteps.quiz.length}문제 중 ${threeSteps.quiz.length - 1}개 맞혔어요!`)).toBeTruthy();
   });
 });
+
+import pictogram from '../src/data/lessons/pictogram.json';
+import PictogramLesson from '../src/lessons/pictogram/PictogramLesson.jsx';
+import { GLYPHS } from '../src/lessons/pictogram/glyphs.jsx';
+
+describe('구조 학습 ③ 비슷한 버튼 찾기', () => {
+  it('모든 보기가 자체 픽토그램으로 그려진다', () => {
+    for (const q of pictogram.questions) {
+      for (const id of q.options) expect(GLYPHS[id], id).toBeTruthy();
+      for (const id of q.answers) expect(q.options).toContain(id);
+    }
+  });
+
+  it('여러 개 고르기 → 확인 → 해설, 끝까지 가면 결과', () => {
+    render(<PictogramLesson lessonId="pictogram" content={pictogram} onExit={() => {}} />);
+    pictogram.questions.forEach((q, i) => {
+      expect(screen.getByText('다 골랐어요').closest('button').disabled).toBe(true);
+      // 첫 문제는 정답 하나를 빠뜨린다
+      const picks = i === 0 ? q.answers.slice(1) : q.answers;
+      for (const id of picks) fireEvent.click(screen.getByRole('img', { name: GLYPHS[id].label }).closest('button'));
+      fireEvent.click(screen.getByText('다 골랐어요'));
+      expect(screen.getByRole('status').textContent).toMatch(i === 0 ? /아쉬워요/ : /모두 맞았어요/);
+      fireEvent.click(screen.getByText(i + 1 === pictogram.questions.length ? '결과 보기' : '다음 문제'));
+    });
+    expect(screen.getByText(`${pictogram.questions.length}문제 중 ${pictogram.questions.length - 1}개 다 맞혔어요!`)).toBeTruthy();
+  });
+});
