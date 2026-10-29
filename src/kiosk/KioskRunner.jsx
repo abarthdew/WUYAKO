@@ -14,7 +14,7 @@ const KIOSK_SCREENS = ['idle', 'dine', 'menu', 'cart', 'payment'];
 // 주문 흐름 실행기. 모양(version.screens)·데이터(theme, mission)는 주입받는다.
 // mission이 없으면 자유 주문 모드(가이드·채점 없음).
 // 가이드 단계(1·2)는 먼저 연습 방식을 고른다: follow는 누른 대로 진행, help는 엉뚱한 곳을 막고 말풍선.
-export default function KioskRunner({ version, theme, mission, missionKey, onExit, onNext }) {
+export default function KioskRunner({ version, theme, mission, missionKey, frame, onExit, onNext, nextLabel }) {
   const stage = version.config;
   const track = useTrack();
   const firstScreen = stage.guide !== 'none' && mission ? 'mode' : 'mission';
@@ -77,7 +77,7 @@ export default function KioskRunner({ version, theme, mission, missionKey, onExi
       {state.screen === 'mode' && <ModeScreen stage={stage} onSelect={(mode) => dispatch({ type: 'SET_MODE', mode })} onBack={onExit} />}
       {state.screen === 'mission' && <MissionScreen stage={stage} mission={mission} onBegin={begin} onBack={onExit} />}
       {KIOSK_SCREENS.includes(state.screen) && (
-        <KioskFrame storeName={theme.storeName} startedAt={state.startedAt} bubble={bubble} onCloseBubble={closeBubble}>
+        <KioskFrame storeName={theme.storeName} device={frame?.device} skin={frame?.skin} startedAt={state.startedAt} bubble={bubble} onCloseBubble={closeBubble}>
           {kioskScreen()}
         </KioskFrame>
       )}
@@ -89,6 +89,7 @@ export default function KioskRunner({ version, theme, mission, missionKey, onExi
           offGuideTaps={state.offGuideTaps}
           onRetry={() => dispatch({ type: 'START_STAGE', stageId: stage.id, screen: firstScreen })}
           onNext={state.result?.success && onNext ? onNext : null}
+          nextLabel={nextLabel}
           onHome={onExit}
         />
       )}

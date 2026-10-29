@@ -14,9 +14,9 @@ export default function App() {
 
   const page = (() => {
     if (!section) return <HomeScreen />;
-    if (section === 'kiosk') return <KioskPage versionId={id} themeSlug={query.theme} />;
+    if (section === 'kiosk') return <KioskPage versionId={id} themeSlug={query.theme} query={query} />;
     if (section === 'lesson') return <LessonPage lessonId={id} />;
-    if (section === 'practice') return <PracticePage practiceId={id} stageId={query.stage} />;
+    if (section === 'practice') return <PracticePage practiceId={id} query={query} />;
     if (section === 'admin') return <AdminPage tool={id} />;
     return <Notice text="없는 화면이에요." onHome={() => navigate('/')} />;
   })();
