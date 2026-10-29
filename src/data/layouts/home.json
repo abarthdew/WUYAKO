@@ -7,14 +7,16 @@
     { "id": "l1", "type": "lesson", "ref": "buttons", "visible": true },
     { "id": "l2", "type": "lesson", "ref": "three-steps", "visible": true },
     { "id": "l3", "type": "lesson", "ref": "pictogram", "visible": true },
-    { "id": "h2", "type": "heading", "text": "키오스크 연습", "visible": true },
+    { "id": "h2", "type": "heading", "text": "주문하는 곳 · 식당, 카페", "visible": true },
     { "id": "k1", "type": "kiosk", "ref": "stage1-v1", "theme": "fastfood", "visible": true },
     { "id": "k2", "type": "kiosk", "ref": "stage2-v1", "theme": "fastfood", "visible": true },
     { "id": "k3", "type": "kiosk", "ref": "stage3-v1", "theme": "fastfood", "visible": true },
-    { "id": "h3", "type": "heading", "text": "짧은 연습", "visible": false },
-    { "id": "p1", "type": "practice", "ref": "qr-order", "visible": false },
-    { "id": "p2", "type": "practice", "ref": "movie", "visible": false },
-    { "id": "p3", "type": "practice", "ref": "self-checkout", "visible": false },
-    { "id": "p4", "type": "practice", "ref": "waitlist", "visible": false }
+    { "id": "p1", "type": "practice", "ref": "qr-order", "visible": true },
+    { "id": "h3", "type": "heading", "text": "예매하는 곳 · 영화관, 기차", "visible": true },
+    { "id": "p2", "type": "practice", "ref": "movie", "visible": true },
+    { "id": "h4", "type": "heading", "text": "직접 계산하는 곳 · 마트", "visible": true },
+    { "id": "p3", "type": "practice", "ref": "self-checkout", "visible": true },
+    { "id": "h5", "type": "heading", "text": "번호표 받는 곳 · 식당 대기, 병원", "visible": true },
+    { "id": "p4", "type": "practice", "ref": "waitlist", "visible": true }
   ]
 }

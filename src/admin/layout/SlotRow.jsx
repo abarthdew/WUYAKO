@@ -1,10 +1,14 @@
+import { SKINS } from '../../features/frame/frame.js';
+import { DEVICES } from '../../features/flowType/flowTypes.js';
 import { SLOT_TYPES } from '../../home/slotTypes.jsx';
 import { listVersions } from '../../kiosk/versions/registry.js';
 import { listLessons } from '../../lessons/registry.js';
-import { listPractices } from '../../practices/registry.js';
+import { getPractice, listPractices } from '../../practices/registry.js';
 
-// 칸 한 줄: 순서·공개·종류별 설정·삭제
+// 칸 한 줄: 순서·공개·종류별 설정·외곽·삭제
 export default function SlotRow({ slot, index, count, themes, onChange, onMove, onRemove }) {
+  const framed = slot.type === 'kiosk' || slot.type === 'practice';
+  const deviceFixed = slot.type === 'practice' && getPractice(slot.ref)?.fixedDevice;
   return (
     <li className={`slot-row ${slot.visible === false ? 'is-hidden' : ''}`}>
       <span className="slot-row__no">{index + 1}</span>
@@ -31,6 +35,17 @@ export default function SlotRow({ slot, index, count, themes, onChange, onMove, 
             </select>
             <select aria-label="가게" value={slot.theme} onChange={(e) => onChange({ theme: e.target.value })}>
               {themes.map((t) => <option key={t} value={t}>{t}</option>)}
+            </select>
+          </>
+        )}
+        {framed && (
+          <>
+            <select aria-label="기기 형태" value={deviceFixed ? 'phone' : slot.device ?? 'kiosk'} disabled={deviceFixed}
+              onChange={(e) => onChange({ device: e.target.value })}>
+              {Object.entries(DEVICES).map(([id, label]) => <option key={id} value={id}>{label}</option>)}
+            </select>
+            <select aria-label="스킨" value={slot.skin ?? 'color'} onChange={(e) => onChange({ skin: e.target.value })}>
+              {Object.entries(SKINS).map(([id, label]) => <option key={id} value={id}>{label}</option>)}
             </select>
           </>
         )}

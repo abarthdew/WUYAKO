@@ -63,12 +63,14 @@ describe('QR 주문 규칙', () => {
 
 describe('영화 예매 규칙', () => {
   const m = getPractice('movie').content.mission;
-  it('날짜 → 상영 → 좌석 순으로 가리키고, 미션에 없는 좌석은 풀게 한다', () => {
+  it('날짜 → 상영 → 좌석 순으로 가리키고, 다른 빈자리도 인정한다', () => {
     expect(mv.targetOf(mv.init(), m)).toBe('mv-date-d1');
     let s = run(mv, [{ type: 'SET_DATE', id: 'd1' }]);
     expect(mv.targetOf(s, m)).toBe('mv-show-s2');
     s = run(mv, [{ type: 'SET_DATE', id: 'd1' }, { type: 'PICK_SHOW', id: 's2' }, { type: 'PLUS' }, { type: 'TO_SEAT' }, { type: 'TOGGLE_SEAT', id: 'A5' }]);
-    expect(mv.targetOf(s, m)).toBe('mv-seat-A5');
+    expect(mv.targetOf(s, m)).toBe('mv-seat-D3');
+    s = mv.reduce(s, { type: 'TOGGLE_SEAT', id: 'A6' });
+    expect(mv.targetOf(s, m)).toBe('mv-next');
   });
   it('인원보다 많이 고를 수 없고, 다 골라야 결제로 간다', () => {
     let s = run(mv, [{ type: 'PICK_SHOW', id: 's1' }, { type: 'TO_SEAT' }, { type: 'TOGGLE_SEAT', id: 'C3' }, { type: 'TOGGLE_SEAT', id: 'C4' }]);
@@ -134,5 +136,35 @@ describe('메인 화면 칸: 짧은 연습', () => {
     expect(resolveSlot({ type: 'practice', ref: 'nope' })).toBeNull();
     const layout = { title: 't', slots: [{ id: 'p1', type: 'practice', ref: 'nope' }] };
     expect(validateLayout(layout, { lessons: [], versions: [], practices: ['waitlist'] })).toEqual(['1번 칸: 없는 연습 nope']);
+  });
+});
+
+import { frameQuery, readFrame } from '../src/features/frame/frame.js';
+import { nextPractice } from '../src/practices/registry.js';
+
+describe('외곽 설정 (기기 형태·스킨)', () => {
+  it('주소 쿼리를 읽고, 모르는 값은 기본값으로', () => {
+    expect(readFrame({ device: 'tablet', skin: 'mono' })).toEqual({ device: 'tablet', skin: 'mono' });
+    expect(readFrame({ device: 'tv', skin: 'neon' })).toEqual({ device: 'kiosk', skin: 'color' });
+  });
+  it('기기가 고정된 연습(QR)은 기기 형태를 바꾸지 않는다', () => {
+    expect(readFrame({ device: 'kiosk' }, getPractice('qr-order')).device).toBe('phone');
+    expect(resolveSlot({ type: 'practice', ref: 'qr-order', device: 'tablet', skin: 'mono' }).path).toBe('/practice/qr-order?skin=mono');
+  });
+  it('칸 설정이 주소에 실린다 (기본값은 생략)', () => {
+    expect(frameQuery({ device: 'kiosk', skin: 'color' })).toBe('');
+    expect(resolveSlot({ type: 'kiosk', ref: 'stage1-v1', theme: 'fastfood', device: 'tablet' }).path).toBe('/kiosk/stage1-v1?theme=fastfood&device=tablet');
+  });
+  it('모르는 기기·스킨은 구성 검사에서 걸린다', () => {
+    const layout = { title: 't', slots: [{ id: 'p1', type: 'practice', ref: 'movie', device: 'tv', skin: 'neon' }] };
+    expect(validateLayout(layout)).toHaveLength(2);
+  });
+});
+
+describe('연습 순서', () => {
+  it('유형 순서 A → B → D → C로 이어지고 마지막은 끝', () => {
+    expect(listPractices().map((p) => p.flowType)).toEqual(['A', 'B', 'D', 'C']);
+    expect(nextPractice('qr-order').id).toBe('movie');
+    expect(nextPractice('waitlist')).toBeNull();
   });
 });

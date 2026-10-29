@@ -12,7 +12,7 @@ const withReset = (model) => (s, a) => (a.type === RESET ? model.init() : model.
 
 // 짧은 연습 실행기: 미션 → 화면 → 결과. 화면·규칙은 practice(model, component)에서 주입받는다.
 // 가이드가 있는 단계는 엉뚱한 곳을 누르면 막고 말풍선으로 알린다.
-export default function PracticeRunner({ practice, stage, onExit }) {
+export default function PracticeRunner({ practice, stage, frame = {}, onExit, onNext }) {
   const { model, content } = practice;
   const mission = content.mission;
   const track = useTrack();
@@ -48,7 +48,13 @@ export default function PracticeRunner({ practice, stage, onExit }) {
     const result = model.resultOf(state, mission, content);
     return (
       <main className="practice-done">
-        <LessonDone message={result.success ? '잘하셨어요!' : '거의 다 왔어요!'} onRetry={() => setPhase('mission')} onExit={onExit} />
+        <LessonDone
+          message={result.success ? '잘하셨어요!' : '거의 다 왔어요!'}
+          onRetry={() => setPhase('mission')}
+          onExit={onExit}
+          onNext={result.success ? onNext : null}
+          nextLabel="다른 키오스크 도전"
+        />
         {result.mistakes.length > 0 && (
           <ul className="practice-done__mistakes">
             {result.mistakes.map((m) => <li key={m}>{m}</li>)}
@@ -62,7 +68,8 @@ export default function PracticeRunner({ practice, stage, onExit }) {
     <StageContext.Provider value={ctx}>
       <KioskFrame
         storeName={practice.device === 'phone' ? DEVICES.phone : content.storeName}
-        device={practice.device}
+        device={frame.device ?? practice.device}
+        skin={frame.skin}
         startedAt={startedAt}
         bubble={bubble}
         onCloseBubble={() => setBubble(false)}

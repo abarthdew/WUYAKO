@@ -3,7 +3,7 @@ import { describeLine } from '../features/cart/cart.js';
 import { describeMistakes } from '../features/mission/describeMistakes.js';
 import './DoneScreen.css';
 
-export default function DoneScreen({ result, store, mission, offGuideTaps = 0, onRetry, onNext, onHome }) {
+export default function DoneScreen({ result, store, mission, offGuideTaps = 0, onRetry, onNext, nextLabel = '다음 단계 도전', onHome }) {
   const nameOf = (key) => {
     const [menuId, set, drinkId] = key.split('|');
     return describeLine({ menuId, set: set === '1', drinkId: drinkId || null, qty: 1 }, store);
@@ -80,7 +80,7 @@ export default function DoneScreen({ result, store, mission, offGuideTaps = 0, o
         <button type="button" onClick={onRetry}>한 번 더</button>
         {onNext && (
           <button type="button" className="is-primary" onClick={onNext}>
-            다음 단계 도전
+            {nextLabel}
           </button>
         )}
         <button type="button" onClick={onHome}>처음으로</button>

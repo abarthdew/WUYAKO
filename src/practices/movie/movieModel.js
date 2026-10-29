@@ -30,10 +30,9 @@ export const targetOf = (s, m) => {
   }
   if (s.screen === 'seat') {
     if (s.people !== m.people) return 'mv-back';
-    const extra = s.seats.find((x) => !m.seats.includes(x));
-    if (extra) return `mv-seat-${extra}`;
-    const missing = m.seats.find((x) => !s.seats.includes(x));
-    return missing ? `mv-seat-${missing}` : 'mv-next';
+    // 어느 빈자리든 인정. 모자랄 때만 추천 자리(m.seats)를 가리킨다.
+    if (s.seats.length === s.people) return 'mv-next';
+    return `mv-seat-${m.seats.find((x) => !s.seats.includes(x)) ?? m.seats[0]}`;
   }
   if (s.screen === 'pay') return `mv-pay-${m.pay}`;
   if (s.screen === 'ticket') return 'mv-finish';

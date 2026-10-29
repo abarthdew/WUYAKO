@@ -64,3 +64,15 @@
   border-width: 10px;
   border-radius: 20px;
 }
+/* 무채색 스킨: 색 단서 없이 모양·글자로만 읽는 연습. 가이드 형광색은 유지한다. */
+.kiosk[data-skin='mono'] {
+  --paper: #f1f1f1;
+  --paper-2: #e2e2e2;
+  --paper-3: #d0d0d0;
+  --card: #ffffff;
+  --awning: #3d3d3d;
+  --wood: #6b6b6b;
+  --teal: #555555;
+  --red: #333333;
+  --disabled: #cfcfcf;
+}
