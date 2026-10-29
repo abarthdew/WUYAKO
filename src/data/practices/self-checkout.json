@@ -1,0 +1,14 @@
+{
+  "storeName": "우야꼬 마트",
+  "basket": [
+    { "id": "milk", "name": "우유", "price": 2800, "icon": "🥛" },
+    { "id": "bread", "name": "식빵", "price": 3500, "icon": "🍞" },
+    { "id": "apple", "name": "사과", "price": 4900, "icon": "🍎" }
+  ],
+  "bagPrice": 100,
+  "mission": {
+    "text": "바구니 속 물건 3개를 하나씩 찍고, 봉투 없이 카드로 계산해 보세요.",
+    "bag": 0,
+    "pay": "card"
+  }
+}

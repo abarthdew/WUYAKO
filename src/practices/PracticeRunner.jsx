@@ -21,7 +21,7 @@ export default function PracticeRunner({ practice, stage, onExit }) {
   const [state, dispatch] = useReducer(reducer, undefined, model.init);
   const [startedAt, setStartedAt] = useState(null);
   const [bubble, setBubble] = useState(false);
-  const target = phase === 'play' && stage.guide !== 'none' ? model.targetOf(state, mission) : null;
+  const target = phase === 'play' && stage.guide !== 'none' ? model.targetOf(state, mission, content) : null;
 
   const ctx = useMemo(
     () => ({ stage, target, screen: state.screen, blockOffGuide: true, onOffGuide: () => setBubble(true) }),
@@ -45,7 +45,7 @@ export default function PracticeRunner({ practice, stage, onExit }) {
   if (phase === 'mission') return <MissionScreen stage={stage} mission={mission} onBegin={begin} onBack={onExit} />;
 
   if (phase === 'done') {
-    const result = model.resultOf(state, mission);
+    const result = model.resultOf(state, mission, content);
     return (
       <main className="practice-done">
         <LessonDone message={result.success ? '잘하셨어요!' : '거의 다 왔어요!'} onRetry={() => setPhase('mission')} onExit={onExit} />

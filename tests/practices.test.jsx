@@ -10,6 +10,8 @@ import PracticeRunner from '../src/practices/PracticeRunner.jsx';
 import { getPractice, listPractices } from '../src/practices/registry.js';
 import * as qr from '../src/practices/qrOrder/qrOrderModel.js';
 import * as wl from '../src/practices/waitlist/waitlistModel.js';
+import * as mv from '../src/practices/movie/movieModel.js';
+import * as sc from '../src/practices/selfCheckout/selfCheckoutModel.js';
 import { FLOW_TYPES } from '../src/features/flowType/flowTypes.js';
 
 afterEach(cleanup);
@@ -20,6 +22,10 @@ describe('연습 유형', () => {
   it('모든 키오스크 버전·짧은 연습이 정의된 유형을 가진다', () => {
     const ids = FLOW_TYPES.map((t) => t.id);
     for (const x of [...listVersions(), ...listPractices()]) expect(ids).toContain(x.flowType);
+  });
+  it('유형마다 연습 화면이 하나 이상 있다', () => {
+    const covered = new Set([...listVersions(), ...listPractices()].map((x) => x.flowType));
+    expect([...covered].sort()).toEqual(FLOW_TYPES.map((t) => t.id).sort());
   });
 });
 
@@ -52,6 +58,38 @@ describe('QR 주문 규칙', () => {
   });
   it('빈 장바구니는 주문할 수 없다', () => {
     expect(qr.reduce(qr.init(), { type: 'ORDER' }).confirm).toBe(false);
+  });
+});
+
+describe('영화 예매 규칙', () => {
+  const m = getPractice('movie').content.mission;
+  it('날짜 → 상영 → 좌석 순으로 가리키고, 미션에 없는 좌석은 풀게 한다', () => {
+    expect(mv.targetOf(mv.init(), m)).toBe('mv-date-d1');
+    let s = run(mv, [{ type: 'SET_DATE', id: 'd1' }]);
+    expect(mv.targetOf(s, m)).toBe('mv-show-s2');
+    s = run(mv, [{ type: 'SET_DATE', id: 'd1' }, { type: 'PICK_SHOW', id: 's2' }, { type: 'PLUS' }, { type: 'TO_SEAT' }, { type: 'TOGGLE_SEAT', id: 'A5' }]);
+    expect(mv.targetOf(s, m)).toBe('mv-seat-A5');
+  });
+  it('인원보다 많이 고를 수 없고, 다 골라야 결제로 간다', () => {
+    let s = run(mv, [{ type: 'PICK_SHOW', id: 's1' }, { type: 'TO_SEAT' }, { type: 'TOGGLE_SEAT', id: 'C3' }, { type: 'TOGGLE_SEAT', id: 'C4' }]);
+    expect(s.seats).toEqual(['C3']);
+    s = run(mv, [{ type: 'PICK_SHOW', id: 's1' }, { type: 'PLUS' }, { type: 'TO_SEAT' }, { type: 'TOGGLE_SEAT', id: 'C3' }, { type: 'TO_PAY' }]);
+    expect(s.screen).toBe('seat');
+  });
+});
+
+describe('셀프 계산대 규칙', () => {
+  const p = getPractice('self-checkout');
+  const m = p.content.mission;
+  it('두 번 찍으면 빼게 하고, 다 찍으면 계산으로', () => {
+    let s = run(sc, [{ type: 'START' }, { type: 'SCAN', id: 'milk' }, { type: 'SCAN', id: 'milk' }]);
+    expect(sc.targetOf(s, m, p.content)).toBe('sc-remove-milk');
+    s = run(sc, [{ type: 'START' }, ...p.content.basket.map((b) => ({ type: 'SCAN', id: b.id }))]);
+    expect(sc.targetOf(s, m, p.content)).toBe('sc-next');
+  });
+  it('합계에 봉투값이 들어간다', () => {
+    const s = { scanned: ['milk'], bag: 1 };
+    expect(sc.totalOf(s, p.content)).toBe(2800 + p.content.bagPrice);
   });
 });
 
