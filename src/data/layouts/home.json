@@ -10,6 +10,9 @@
     { "id": "h2", "type": "heading", "text": "키오스크 연습", "visible": true },
     { "id": "k1", "type": "kiosk", "ref": "stage1-v1", "theme": "fastfood", "visible": true },
     { "id": "k2", "type": "kiosk", "ref": "stage2-v1", "theme": "fastfood", "visible": true },
-    { "id": "k3", "type": "kiosk", "ref": "stage3-v1", "theme": "fastfood", "visible": true }
+    { "id": "k3", "type": "kiosk", "ref": "stage3-v1", "theme": "fastfood", "visible": true },
+    { "id": "h3", "type": "heading", "text": "짧은 연습", "visible": false },
+    { "id": "p1", "type": "practice", "ref": "qr-order", "visible": false },
+    { "id": "p2", "type": "practice", "ref": "waitlist", "visible": false }
   ]
 }

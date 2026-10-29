@@ -4,8 +4,8 @@ import GuideBubble from '../features/guide/GuideBubble.jsx';
 import StageTimer from '../features/stage/StageTimer.jsx';
 import './KioskFrame.css';
 
-// 시뮬레이션 키오스크 외곽. 단계별 스타일은 data-stage로 분기한다.
-export default function KioskFrame({ storeName, startedAt, bubble = false, onCloseBubble, children }) {
+// 시뮬레이션 키오스크 외곽. 단계별 스타일은 data-stage, 기기 형태(kiosk·tablet·phone)는 data-device로 분기한다.
+export default function KioskFrame({ storeName, device = 'kiosk', startedAt, bubble = false, onCloseBubble, children }) {
   const { stage, target, onOffGuide } = useStage();
   const screenRef = useRef(null);
   // 버튼이 아닌 빈 곳을 눌러도 안내 (버튼은 KioskButton이 직접 처리)
@@ -15,7 +15,7 @@ export default function KioskFrame({ storeName, startedAt, bubble = false, onClo
     onOffGuide?.();
   };
   return (
-    <div className={`kiosk ${target ? 'has-guide' : ''}`} data-stage={stage.id}>
+    <div className={`kiosk ${target ? 'has-guide' : ''}`} data-stage={stage.id} data-device={device}>
       <header className="kiosk__bar">
         <span>{storeName}</span>
         <StageTimer limitSec={stage.timeLimitSec} startedAt={startedAt} />
