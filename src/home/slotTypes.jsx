@@ -1,6 +1,7 @@
 import { getStage } from '../features/stage/stages.js';
 import { getVersion } from '../kiosk/versions/registry.js';
 import { getLesson } from '../lessons/registry.js';
+import { getPractice } from '../practices/registry.js';
 
 // 메인 화면 칸 종류 등록부. resolve: 칸 → 표시 정보(없는 참조면 null → 숨김)
 export const SLOT_TYPES = {
@@ -22,6 +23,13 @@ export const SLOT_TYPES = {
       if (!v) return null;
       const stage = getStage(v.stage);
       return { kind: 'card', icon: String(stage.id), title: s.title || stage.title, summary: s.summary || stage.summary, path: `/kiosk/${v.id}?theme=${s.theme}` };
+    },
+  },
+  practice: {
+    label: '짧은 연습',
+    resolve: (s) => {
+      const p = getPractice(s.ref);
+      return p && { kind: 'card', icon: p.icon, title: s.title || p.title, summary: s.summary || p.summary, path: `/practice/${p.id}` };
     },
   },
 };

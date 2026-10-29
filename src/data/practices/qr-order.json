@@ -1,0 +1,11 @@
+{
+  "storeName": "우야꼬 분식",
+  "table": 3,
+  "menu": [
+    { "id": "kimbap", "name": "김밥", "price": 3500, "icon": "🍙" },
+    { "id": "ramen", "name": "라면", "price": 4000, "icon": "🍜" },
+    { "id": "tteokbokki", "name": "떡볶이", "price": 4500, "icon": "🌶️" },
+    { "id": "odeng", "name": "어묵", "price": 3000, "icon": "🍢" }
+  ],
+  "mission": { "text": "식탁의 QR을 휴대폰으로 찍고, 라면 1개를 주문해 보세요.", "items": [{ "menuId": "ramen", "qty": 1 }] }
+}

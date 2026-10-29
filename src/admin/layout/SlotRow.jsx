@@ -1,6 +1,7 @@
 import { SLOT_TYPES } from '../../home/slotTypes.jsx';
 import { listVersions } from '../../kiosk/versions/registry.js';
 import { listLessons } from '../../lessons/registry.js';
+import { listPractices } from '../../practices/registry.js';
 
 // 칸 한 줄: 순서·공개·종류별 설정·삭제
 export default function SlotRow({ slot, index, count, themes, onChange, onMove, onRemove }) {
@@ -16,6 +17,11 @@ export default function SlotRow({ slot, index, count, themes, onChange, onMove, 
         {slot.type === 'lesson' && (
           <select aria-label="학습 모듈" value={slot.ref} onChange={(e) => onChange({ ref: e.target.value })}>
             {listLessons().map((l) => <option key={l.id} value={l.id}>{l.title}</option>)}
+          </select>
+        )}
+        {slot.type === 'practice' && (
+          <select aria-label="짧은 연습" value={slot.ref} onChange={(e) => onChange({ ref: e.target.value })}>
+            {listPractices().map((p) => <option key={p.id} value={p.id}>{p.title}</option>)}
           </select>
         )}
         {slot.type === 'kiosk' && (

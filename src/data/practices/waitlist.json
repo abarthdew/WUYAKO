@@ -1,0 +1,6 @@
+{
+  "storeName": "우야꼬 식당",
+  "mission": { "text": "2명, 내 번호 010-1234-5678로 대기 등록을 해 보세요.", "people": 2, "phone": "12345678" },
+  "ticketNo": 12,
+  "waitingAhead": 3
+}

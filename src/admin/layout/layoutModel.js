@@ -10,6 +10,7 @@ const DEFAULTS = {
   heading: () => ({ type: 'heading', text: '새 제목' }),
   lesson: (ctx) => ({ type: 'lesson', ref: ctx.lessons[0] }),
   kiosk: (ctx) => ({ type: 'kiosk', ref: ctx.versions[0], theme: ctx.themes[0] }),
+  practice: (ctx) => ({ type: 'practice', ref: ctx.practices[0] }),
 };
 
 export const addSlot = (layout, type, ctx) => ({

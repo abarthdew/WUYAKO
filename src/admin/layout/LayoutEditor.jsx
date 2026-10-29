@@ -6,6 +6,7 @@ import HomeLayout from '../../home/HomeLayout.jsx';
 import { SLOT_TYPES } from '../../home/slotTypes.jsx';
 import { listVersions } from '../../kiosk/versions/registry.js';
 import { listLessons } from '../../lessons/registry.js';
+import { listPractices } from '../../practices/registry.js';
 import { adminApi } from '../adminApi.js';
 import * as M from './layoutModel.js';
 import SlotRow from './SlotRow.jsx';
@@ -32,7 +33,7 @@ export default function LayoutEditor() {
 
   if (!layout) return <p>불러오는 중…</p>;
 
-  const ctx = { lessons: listLessons().map((l) => l.id), versions: listVersions().map((v) => v.id), themes };
+  const ctx = { lessons: listLessons().map((l) => l.id), versions: listVersions().map((v) => v.id), practices: listPractices().map((p) => p.id), themes };
   const errors = validateLayout(layout, themes.length ? ctx : { ...ctx, themes: null });
   const edit = (fn) => {
     setLayout((l) => fn(l));

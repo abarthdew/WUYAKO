@@ -53,3 +53,14 @@
   --touch-min: 48px;
   font-size: var(--fs-body);
 }
+/* 기기 형태: 휴대폰은 좁고 둥글게, 태블릿은 넓게 */
+.kiosk[data-device='phone'] {
+  max-width: 400px;
+  border-width: 6px;
+  border-radius: 32px;
+}
+.kiosk[data-device='tablet'] {
+  max-width: 560px;
+  border-width: 10px;
+  border-radius: 20px;
+}

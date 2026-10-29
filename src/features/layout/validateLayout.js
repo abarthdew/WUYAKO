@@ -1,5 +1,5 @@
 // 메인 화면 구성 검사 (서버·관리자 화면 공용). known이 있으면 참조 대상까지 확인한다.
-export const SLOT_TYPES = ['heading', 'lesson', 'kiosk'];
+export const SLOT_TYPES = ['heading', 'lesson', 'kiosk', 'practice'];
 
 export const validateLayout = (layout, known = null) => {
   const errors = [];
@@ -13,6 +13,7 @@ export const validateLayout = (layout, known = null) => {
     if (!SLOT_TYPES.includes(s.type)) errors.push(`${at}: 알 수 없는 종류 ${s.type}`);
     if (s.type === 'heading' && !s.text?.trim()) errors.push(`${at}: 제목 글자가 비었습니다`);
     if (s.type === 'lesson' && known && !known.lessons.includes(s.ref)) errors.push(`${at}: 없는 학습 ${s.ref}`);
+    if (s.type === 'practice' && known?.practices && !known.practices.includes(s.ref)) errors.push(`${at}: 없는 연습 ${s.ref}`);
     if (s.type === 'kiosk') {
       if (known && !known.versions.includes(s.ref)) errors.push(`${at}: 없는 화면 버전 ${s.ref}`);
       if (!s.theme) errors.push(`${at}: 가게(테마)를 고르세요`);
